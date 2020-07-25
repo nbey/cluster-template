@@ -1,14 +1,19 @@
 [hololens]
-package = "holo/lens-helm"
+package = "holo/lens-helm3"
+
+[hololens.helm]
+namespace = "cert-manager"
+release_name = "cert-manager"
+
 chart_path = "charts/cert-manager"
 value_files = [
     "manifests/helm-values.yaml",
     "values.yaml"
 ]
-kube_version = "1.18.0"
 
 [hololens.input]
 root = "infra/cert-manager"
+files = "**"
 
 [hololens.output]
 merge = "replace"
