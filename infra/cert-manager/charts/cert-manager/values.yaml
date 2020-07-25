@@ -91,6 +91,16 @@ securityContext: {}
 #   runAsUser: 1000
 #   runAsNonRoot: true
 
+# Container Security Context to be set on the controller component container
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+containerSecurityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+
+
 volumes: []
 
 volumeMounts: []
@@ -102,6 +112,7 @@ volumeMounts: []
 # podAnnotations: {}
 
 podLabels: {}
+
 # Optional DNS settings, useful if you have a public and private DNS zone for
 # the same domain on Route 53. What follows is an example of ensuring
 # cert-manager can access an ingress or DNS TXT records at all times.
@@ -169,6 +180,15 @@ webhook:
 
   securityContext: {}
 
+  # Container Security Context to be set on the webhook component container
+  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+  containerSecurityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+
   # Optional additional annotations to add to the webhook Deployment
   # deploymentAnnotations: {}
 
@@ -223,6 +243,16 @@ cainjector:
     #   maxUnavailable: 1
 
   securityContext: {}
+
+  # Container Security Context to be set on the cainjector component container
+  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+  containerSecurityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+
 
   # Optional additional annotations to add to the cainjector Deployment
   # deploymentAnnotations: {}
