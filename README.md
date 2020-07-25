@@ -87,3 +87,29 @@ git commit -m "feat: enable prometheus in cert-manager"
 # re-project and commit to previous branch
 git holo project k8s-manifests --commit-to=k8s/manifests
 ```
+
+## GitHub Actions
+
+A GitHub Actions workflow can be used to automatically maintain a projected holobranch based on some branch that contains a definition of it. Using the holobranch name `k8s-manifests` as this repository and the above example do, this workflow will project it to the `k8s/master` branch every time the `master` branch is pushed:
+
+```yaml
+name: k8s manifests
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  k8s-manifests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Update holobranch: k8s/master'
+      uses: JarvusInnovations/hologit@actions/projector/v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        HAB_LICENSE: accept
+      with:
+        holobranch: k8s-manifests
+        commit-to: k8s/master
+```
