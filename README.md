@@ -4,7 +4,7 @@ This template provides a common foundation for lightweight k8s clusters.
 
 ## Getting started
 
-The `.holo/branches/k8s-manifests` tree defines a holobranch named `k8s-manifest`, which can be projected with the `git-holo` tool:
+The `.holo/branches/k8s-manifests` tree defines a holobranch named `k8s-manifests`, which can be projected with the [`git-holo`](https://github.com/JarvusInnovations/hologit) tool:
 
 ```bash
 npm install -g hologit
