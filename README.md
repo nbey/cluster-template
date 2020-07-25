@@ -26,7 +26,11 @@ git holo project k8s-manifest --commit-to=k8s/master
 - `.holo/branches/k8s-manifests/infra/cert-manager.toml` populates the `infra/cert-manager/` path of the `k8s-manifests` holobranch with content from the `cert-manager` source
 - `.holo/branches/k8s-manifests/infra/cert-manager.crd.toml` populates the `infra/cert-manager.crd/` path of the `k8s-manifests` holobranch with content from the `cert-manager` source
 - `.holo/lenses/cert-manager` applies `helm template` to the `infra/cert-manager/` path, replacing it with the rendered output
+    - Lens source: <https://github.com/hologit/lens-helm3>
+    - Lens packages: <https://bldr.habitat.sh/#/pkgs/holo/lens-helm3/latest>
 - `.holo/lenses/k8s-normalize` applies (after all other lenses) a NodeJS script to the entire tree converting it to a normal form
+    - Lens source: <https://github.com/hologit/lens-k8s-normalize>
+    - Lens packages: <https://bldr.habitat.sh/#/pkgs/holo/lens-k8s-normalize/latest>
 
 ## Using
 
