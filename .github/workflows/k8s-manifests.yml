@@ -16,8 +16,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         HAB_LICENSE: accept
       with:
-        lens: false
-        holobranch: k8s-manifests
+        holobranch: k8s-blueprint
         commit-to: k8s/blueprint
     - name: 'Update holobranch: k8s/master'
       uses: JarvusInnovations/hologit@actions/projector/v1
