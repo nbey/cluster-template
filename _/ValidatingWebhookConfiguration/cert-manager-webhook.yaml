@@ -1,18 +1,24 @@
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: cert-manager-webhook
-  labels:
-    app: webhook
-    app.kubernetes.io/name: webhook
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/component: webhook
-    helm.sh/chart: cert-manager-v0.1.0
   annotations:
     cert-manager.io/inject-ca-from-secret: cert-manager/cert-manager-webhook-ca
+  labels:
+    app: webhook
+    app.kubernetes.io/component: webhook
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: webhook
+    helm.sh/chart: cert-manager-v0.1.0
+  name: cert-manager-webhook
 webhooks:
-  - name: webhook.cert-manager.io
+  - clientConfig:
+      service:
+        name: cert-manager-webhook
+        namespace: cert-manager
+        path: /validate
+    failurePolicy: Fail
+    name: webhook.cert-manager.io
     namespaceSelector:
       matchExpressions:
         - key: cert-manager.io/disable-validation
@@ -34,10 +40,4 @@ webhooks:
           - UPDATE
         resources:
           - '*/*'
-    failurePolicy: Fail
     sideEffects: None
-    clientConfig:
-      service:
-        name: cert-manager-webhook
-        namespace: cert-manager
-        path: /validate
