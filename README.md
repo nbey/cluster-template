@@ -22,13 +22,18 @@ git holo project k8s-manifest --commit-to=k8s/master
 
 - `.holo/config.toml` assigns the source name `jarvus-cluster-template` to the local repository
 - `.holo/sources/cert-manager.toml` defines a named remote content source
+- `.holo/sources/ingress-nginx.toml` defines a named remote content source
 - `.holo/branches/k8s-manifests/_jarvus-cluster-template.toml` populates the root of the `k8s-manifests` holobranch with a filtered subset of the local repository's contents
 - `.holo/branches/k8s-manifests/infra/cert-manager.toml` populates the `infra/cert-manager/` path of the `k8s-manifests` holobranch with content from the `cert-manager` source
 - `.holo/branches/k8s-manifests/infra/cert-manager.crd.toml` populates the `infra/cert-manager.crd/` path of the `k8s-manifests` holobranch with content from the `cert-manager` source
+- `.holo/branches/k8s-manifests/infra/ingress-nginx.toml` populates the `infra/ingress-nginx/` path of the `k8s-manifests` holobranch with content from the `ingress-nginx` source
 - `.holo/lenses/cert-manager.toml` applies `helm template` to the `infra/cert-manager/` path, replacing it with the rendered output
     - Lens source: <https://github.com/hologit/lens-helm3>
     - Lens packages: <https://bldr.habitat.sh/#/pkgs/holo/lens-helm3/latest>
-    -
+- `.holo/lenses/ingress-nginx.toml` applies `helm template` to the `infra/ingress-nginx/` path, replacing it with the rendered output
+    - Lens source: <https://github.com/hologit/lens-helm3>
+    - Lens packages: <https://bldr.habitat.sh/#/pkgs/holo/lens-helm3/latest>
+    - Uses `namespace_fill = true` option to make up for [https://github.com/helm/helm/issues/3553](helm#3553) and allow namespace to be applied at render time
 - `.holo/lenses/k8s-normalize.toml` applies (after all other lenses) a NodeJS script to the entire tree converting it to a normal form
     - Lens source: <https://github.com/hologit/lens-k8s-normalize>
     - Lens packages: <https://bldr.habitat.sh/#/pkgs/holo/lens-k8s-normalize/latest>
