@@ -1,0 +1,3 @@
+[holosource]
+url = "https://github.com/kubernetes/ingress-nginx"
+ref = "refs/tags/ingress-nginx-2.11.1"

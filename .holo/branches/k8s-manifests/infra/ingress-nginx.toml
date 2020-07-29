@@ -1,0 +1,4 @@
+[holomapping]
+files = [
+    "charts/ingress-nginx/**"
+]

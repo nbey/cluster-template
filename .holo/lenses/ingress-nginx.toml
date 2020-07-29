@@ -1,0 +1,22 @@
+[hololens]
+package = "holo/lens-helm3/1.1"
+
+[hololens.helm]
+namespace = "ingress-nginx"
+release_name = "ingress-nginx"
+
+namespace_fill = true
+
+chart_path = "charts/ingress-nginx"
+value_files = [
+    "values.yaml"
+]
+
+[hololens.post_helm]
+
+[hololens.input]
+root = "infra/ingress-nginx"
+files = "**"
+
+[hololens.output]
+merge = "replace"
