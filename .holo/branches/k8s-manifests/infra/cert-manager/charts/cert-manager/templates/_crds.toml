@@ -1,4 +1,4 @@
 [holomapping]
 holosource = "cert-manager"
 root = "deploy/crds"
-files = "**/*.yaml"
+files = "*.yaml"
