@@ -1,5 +1,5 @@
 [hololens]
-package = "holo/lens-helm3/1.1"
+package = "holo/lens-helm3/1.2"
 
 [hololens.helm]
 namespace = "ingress-nginx"
