@@ -1,3 +1,5 @@
 [holosource]
-url = "https://github.com/compumike/hairpin-proxy"
-ref = "refs/tags/v0.1.1"
+# url = "https://github.com/compumike/hairpin-proxy"
+# ref = "refs/tags/v0.1.1"
+url = "https://github.com/themightychris/hairpin-proxy"
+ref = "refs/heads/patch-1"
