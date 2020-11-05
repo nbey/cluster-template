@@ -1,9 +1,9 @@
 [hololens]
-package = "holo/lens-k8s-normalize/1.0"
+package = "holo/lens-k8s-normalize/1.1"
 
 [hololens.input]
 after = "*"
-files = "**/*.yaml"
+files = "**/*.{yaml,yml}"
 
 [hololens.output]
 merge = "replace"
