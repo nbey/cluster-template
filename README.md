@@ -18,7 +18,15 @@ The output is the hash of a git tree object, which could be passed to `git archi
 git holo project k8s-manifests --commit-to=k8s/manifests
 ```
 
-You can even go straight from working tree to `kubectl diff` (or `apply`):
+A previous-committed projection can be sent directly to `kubectl diff` (or `apply`):
+
+```bash
+git archive --format=tar k8s/manifests \
+  | tar -xf - --to-command='bash -c "echo --- && cat"' \
+  | kubectl diff -f -
+```
+
+You could even go straight from working tree to `kubectl diff` (or `apply`):
 
 ```bash
 git holo project k8s-manifests --working --fetch \
