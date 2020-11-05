@@ -9,13 +9,22 @@ The `.holo/branches/k8s-manifests` tree defines a holobranch named `k8s-manifest
 ```bash
 npm install -g hologit
 cd ./cluster-template
-git holo project k8s-manifest # output is tree hash
+git holo project k8s-manifests # output is tree hash
 ```
 
 The output is the hash of a git tree object, which could be passed to `git archive` to generate a tar stream or file, or you could instead have `git-holo` commit it to a named branch for you:
 
 ```bash
-git holo project k8s-manifest --commit-to=k8s/master
+git holo project k8s-manifests --commit-to=k8s/manifests
+```
+
+You can even go straight from working tree to `kubectl diff` (or `apply`):
+
+```bash
+git holo project k8s-manifests --working --fetch \
+  | xargs -n 1 git archive --format=tar \
+  | tar -xf - --to-command='bash -c "echo --- && cat"' \
+  | kubectl diff -f -
 ```
 
 ## How it works
@@ -110,12 +119,12 @@ jobs:
   k8s-manifests:
     runs-on: ubuntu-latest
     steps:
-    - name: 'Update holobranch: k8s/master'
+    - name: 'Update holobranch: k8s/manifests'
       uses: JarvusInnovations/hologit@actions/projector/v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         HAB_LICENSE: accept
       with:
         holobranch: k8s-manifests
-        commit-to: k8s/master
+        commit-to: k8s/manifests
 ```
