@@ -18,11 +18,11 @@ jobs:
       with:
         holobranch: k8s-blueprint
         commit-to: k8s/blueprint
-    - name: 'Update holobranch: k8s/master'
+    - name: 'Update holobranch: k8s/manifests'
       uses: JarvusInnovations/hologit@actions/projector/v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         HAB_LICENSE: accept
       with:
         holobranch: k8s-manifests
-        commit-to: k8s/master
+        commit-to: k8s/manifests
