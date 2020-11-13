@@ -1,4 +1,5 @@
 [holomapping]
+after = "*"
 files = [
     "*/**",
     "!.github/**",
