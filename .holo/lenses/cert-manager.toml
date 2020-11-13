@@ -12,7 +12,7 @@ value_files = [
 ]
 
 [hololens.input]
-root = "infra/cert-manager"
+root = "cert-manager"
 files = "**"
 
 [hololens.output]

@@ -18,7 +18,7 @@ manifest => {
 '''
 
 [hololens.input]
-root = "infra/metrics-server"
+root = "metrics-server"
 files = "**"
 
 [hololens.output]
