@@ -5,7 +5,7 @@ package = "holo/lens-kustomize/1.0"
 directory = "release"
 
 [hololens.input]
-root = "infra/metrics-server"
+root = "metrics-server"
 files = "**"
 
 [hololens.output]

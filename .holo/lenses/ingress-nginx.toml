@@ -15,7 +15,7 @@ value_files = [
 [hololens.post_helm]
 
 [hololens.input]
-root = "infra/ingress-nginx"
+root = "ingress-nginx"
 files = "**"
 
 [hololens.output]
