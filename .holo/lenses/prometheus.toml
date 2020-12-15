@@ -1,0 +1,18 @@
+[hololens]
+package = "holo/lens-helm3/1.3"
+
+[hololens.helm]
+namespace = "prometheus"
+release_name = "prometheus"
+
+chart_path = "charts/prometheus"
+value_files = [
+    "values.yaml"
+]
+
+[hololens.input]
+root = "prometheus"
+files = "**"
+
+[hololens.output]
+merge = "replace"
