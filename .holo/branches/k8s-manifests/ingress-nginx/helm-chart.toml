@@ -1,0 +1,4 @@
+[holomapping]
+holosource = "ingress-nginx"
+root = "charts/ingress-nginx"
+files = "**"

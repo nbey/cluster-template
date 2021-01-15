@@ -1,0 +1,5 @@
+[holomapping]
+root = "deploy/manifests"
+files = [
+    "helm-values.yaml"
+]

@@ -7,9 +7,9 @@ release_name = "ingress-nginx"
 
 namespace_fill = true
 
-chart_path = "charts/ingress-nginx"
+chart_path = "helm-chart"
 value_files = [
-    "values.yaml"
+    "release-values.yaml"
 ]
 
 [hololens.post_helm]

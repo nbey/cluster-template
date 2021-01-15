@@ -1,7 +1,0 @@
-[holomapping]
-root = "deploy"
-files = [
-    "charts/cert-manager/**",
-    "manifests/helm-values.yaml",
-    "!**/BUILD.bazel"
-]
