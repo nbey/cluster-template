@@ -1,13 +1,1 @@
-image:
-  tag: v0.15.2
-
-webhook:
-  image:
-    tag: v0.15.2
-
-cainjector:
-  image:
-    tag: v0.15.2
-
-prometheus:
-  enabled: false
+# See https://github.com/jetstack/cert-manager/blob/master/deploy/charts/cert-manager/values.yaml
