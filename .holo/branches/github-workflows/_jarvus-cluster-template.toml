@@ -1,0 +1,6 @@
+[holomapping]
+root = ".github/workflows"
+files = [
+    "deploy-k8s-manifests.yml",
+    "prepare-k8s-manifests.yml",
+]
