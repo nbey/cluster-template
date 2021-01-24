@@ -1,28 +1,27 @@
-name: k8s manifests
+name: Update tag projections
 
 on:
   push:
-    branches:
-      - 'master'
+    tags: [ 'v*' ]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  HAB_LICENSE: accept-no-persist
 
 
 jobs:
-  k8s-manifests:
+  update-tag-projections:
     runs-on: ubuntu-latest
     steps:
+
     - name: 'Update holobranch: k8s/blueprint'
       uses: JarvusInnovations/hologit@actions/projector/v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        HAB_LICENSE: accept
       with:
         holobranch: k8s-blueprint
         commit-to: k8s/blueprint
+
     - name: 'Update holobranch: k8s/manifests'
       uses: JarvusInnovations/hologit@actions/projector/v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        HAB_LICENSE: accept
       with:
         holobranch: k8s-manifests
         commit-to: k8s/manifests
