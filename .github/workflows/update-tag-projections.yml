@@ -14,14 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: 'Update holobranch: k8s/blueprint'
+    - name: 'Update holobranch: k8s/blueprint/common'
       uses: JarvusInnovations/hologit@actions/projector/v1
       with:
         holobranch: k8s-blueprint
-        commit-to: k8s/blueprint
+        commit-to: k8s/blueprint/common
 
-    - name: 'Update holobranch: k8s/manifests'
+    - name: 'Update holobranch: k8s/manifests/common'
       uses: JarvusInnovations/hologit@actions/projector/v1
       with:
         holobranch: k8s-manifests
-        commit-to: k8s/manifests
+        commit-to: k8s/manifests/common
