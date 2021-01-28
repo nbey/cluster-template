@@ -1,3 +1,4 @@
+# These values as applied first as template-provided defaults
 # See https://www.linode.com/community/questions/20620/how-can-i-use-proxy-protocol-with-linode-kubernetes-engine
 
 controller:
