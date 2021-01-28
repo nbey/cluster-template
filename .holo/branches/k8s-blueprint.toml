@@ -1,3 +1,2 @@
 [holobranch]
-extend = "k8s-manifests"
 lens = false
