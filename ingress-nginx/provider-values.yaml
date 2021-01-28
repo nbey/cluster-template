@@ -1,4 +1,5 @@
 # These values as applied second as provider-level defaults
+# See https://www.linode.com/community/questions/20620/how-can-i-use-proxy-protocol-with-linode-kubernetes-engine
 
 controller:
   config:
