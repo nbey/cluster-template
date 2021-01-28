@@ -1,0 +1,6 @@
+# These values as applied second as provider-level defaults
+
+controller:
+  service:
+    externalTrafficPolicy: Local
+  
