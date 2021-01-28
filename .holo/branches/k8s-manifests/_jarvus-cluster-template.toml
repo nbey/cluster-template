@@ -1,6 +1,4 @@
 [holomapping]
 after = "*"
-files = [
-    "*/**",
-    "!.github/**",
-]
+root = "k8s-common"
+files = "**"
