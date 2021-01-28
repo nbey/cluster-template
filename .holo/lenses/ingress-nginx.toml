@@ -10,6 +10,7 @@ namespace_fill = true
 chart_path = "helm-chart"
 value_files = [
     "default-values.yaml",
+    "provider-values.yaml",
     "release-values.yaml"
 ]
 
