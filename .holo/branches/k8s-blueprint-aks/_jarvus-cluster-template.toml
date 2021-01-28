@@ -1,9 +1,0 @@
-[holomapping]
-holosource = "=>k8s-blueprint"
-files = [
-    "**",
-
-    # AKS has metrics-server baked in
-    "!.holo/lenses/metrics-server.*",
-    "!metrics-server/**",
-]
