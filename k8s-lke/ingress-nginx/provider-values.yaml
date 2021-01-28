@@ -1,0 +1,8 @@
+# These values as applied second as provider-level defaults
+
+controller:
+  config:
+    use-proxy-protocol: "true"
+  service:
+    annotations:
+      service.beta.kubernetes.io/linode-loadbalancer-proxy-protocol: v2
