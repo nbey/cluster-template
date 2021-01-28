@@ -1,0 +1,3 @@
+[holobranch]
+extend = "k8s-blueprint-lke"
+lens = true
