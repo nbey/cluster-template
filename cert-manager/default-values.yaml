@@ -1,3 +1,5 @@
+# These values as applied first as template-provided defaults
+
 image:
   tag: v0.15.2
 

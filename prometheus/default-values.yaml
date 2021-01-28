@@ -1,3 +1,5 @@
+# These values as applied first as template-provided defaults
+
 server:
   global:
     scrape_interval: 30s
