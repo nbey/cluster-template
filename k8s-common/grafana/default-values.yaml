@@ -1,5 +1,10 @@
 # These values as applied first as template-provided defaults
----
+
+admin:
+
+  # by configuring an existing secret, a random one will not be generated
+  existingSecret: grafana
+
 datasources:
   datasources.yaml:
     apiVersion: 1
