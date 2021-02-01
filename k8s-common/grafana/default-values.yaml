@@ -3,7 +3,7 @@
 admin:
 
   # by configuring an existing secret, a random one will not be generated
-  existingSecret: grafana
+  existingSecret: grafana-initial-admin
 
 datasources:
   datasources.yaml:
