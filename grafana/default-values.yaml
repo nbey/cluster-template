@@ -1,0 +1,48 @@
+# These values as applied first as template-provided defaults
+---
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server.prometheus.svc.cluster.local
+        isDefault: true
+
+dashboardProviders:
+
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: false
+      editable: true
+      options:
+        path: /var/lib/grafana/dashboards/default
+
+dashboards:
+
+  default:
+
+    node-exporter:
+      gnetId: 1860
+      revision: 22
+      datasource: Prometheus
+
+    workload-view:
+      gnetId: 8588
+      revision: 1
+      datasource: Prometheus
+
+    cluster-view:
+      gnetId: 7249
+      revision: 1
+      datasource: Prometheus
+
+persistence:
+
+  enabled: true
