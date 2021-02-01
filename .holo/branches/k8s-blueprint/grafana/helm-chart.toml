@@ -1,0 +1,7 @@
+[holomapping]
+holosource = "grafana"
+root = "charts/grafana"
+files = [
+  "**",
+  "!templates/tests/**"
+]
