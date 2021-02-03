@@ -29,6 +29,8 @@ webhooks:
           operator: NotIn
           values:
             - cert-manager
+        - key: control-plane
+          operator: DoesNotExist
     rules:
       - apiGroups:
           - cert-manager.io
