@@ -1,0 +1,27 @@
+# See https://github.com/argoproj/argo-cd/issues/4320
+# Add configuration that AKS adds automatically to quiet diffs
+
+[hololens]
+package = "holo/lens-k8s-patch/1.1"
+after = "cert-manager"
+
+[hololens.k8s-patch]
+script = '''
+manifest => {
+    const { kind, metadata: { name }, webhooks } = manifest
+
+    if ( kind == 'ValidatingWebhookConfiguration' && name == 'cert-manager-webhook') {
+        webhooks[0].namespaceSelector.matchExpressions.push({
+            key: 'control-plane',
+            operator: 'DoesNotExist'
+        });
+    }
+}
+'''
+
+[hololens.input]
+root = "cert-manager"
+files = "**"
+
+[hololens.output]
+merge = "replace"
