@@ -1,15 +1,12 @@
 # These values as applied first as template-provided defaults
 
 image:
-  tag: v0.15.2
+  tag: v1.2.0
 
 webhook:
   image:
-    tag: v0.15.2
+    tag: v1.2.0
 
 cainjector:
   image:
-    tag: v0.15.2
-
-prometheus:
-  enabled: false
+    tag: v1.2.0
