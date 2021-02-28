@@ -10,6 +10,3 @@ webhook:
 cainjector:
   image:
     tag: v1.2.0
-
-prometheus:
-  enabled: false
