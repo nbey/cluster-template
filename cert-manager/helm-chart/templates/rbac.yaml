@@ -1,6 +1,6 @@
 {{- if .Values.global.rbac.create -}}
 
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: {{ template "cert-manager.fullname" . }}:leaderelection
@@ -26,7 +26,7 @@ rules:
 
 # grant cert-manager permission to manage the leaderelection configmap in the
 # leader election namespace
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ include "cert-manager.fullname" . }}:leaderelection
@@ -51,7 +51,7 @@ subjects:
 ---
 
 # Issuer controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-issuers
@@ -79,7 +79,7 @@ rules:
 ---
 
 # ClusterIssuer controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-clusterissuers
@@ -107,7 +107,7 @@ rules:
 ---
 
 # Certificates controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-certificates
@@ -144,7 +144,7 @@ rules:
 ---
 
 # Orders controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-orders
@@ -184,7 +184,7 @@ rules:
 ---
 
 # Challenges controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-challenges
@@ -220,7 +220,7 @@ rules:
   - apiGroups: [""]
     resources: ["pods", "services"]
     verbs: ["get", "list", "watch", "create", "delete"]
-  - apiGroups: ["extensions"]
+  - apiGroups: ["networking.k8s.io"]
     resources: ["ingresses"]
     verbs: ["get", "list", "watch", "create", "delete", "update"]
   # We require the ability to specify a custom hostname when we are creating
@@ -243,7 +243,7 @@ rules:
 ---
 
 # ingress-shim controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-ingress-shim
@@ -261,13 +261,13 @@ rules:
   - apiGroups: ["cert-manager.io"]
     resources: ["certificates", "certificaterequests", "issuers", "clusterissuers"]
     verbs: ["get", "list", "watch"]
-  - apiGroups: ["extensions"]
+  - apiGroups: ["networking.k8s.io"]
     resources: ["ingresses"]
     verbs: ["get", "list", "watch"]
   # We require these rules to support users with the OwnerReferencesPermissionEnforcement
   # admission controller enabled:
   # https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#ownerreferencespermissionenforcement
-  - apiGroups: ["extensions"]
+  - apiGroups: ["networking.k8s.io"]
     resources: ["ingresses/finalizers"]
     verbs: ["update"]
   - apiGroups: [""]
@@ -276,7 +276,7 @@ rules:
 
 ---
 
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-issuers
@@ -298,7 +298,7 @@ subjects:
 
 ---
 
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-clusterissuers
@@ -320,7 +320,7 @@ subjects:
 
 ---
 
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-certificates
@@ -342,7 +342,7 @@ subjects:
 
 ---
 
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-orders
@@ -364,7 +364,7 @@ subjects:
 
 ---
 
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-challenges
@@ -386,7 +386,7 @@ subjects:
 
 ---
 
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: {{ template "cert-manager.fullname" . }}-controller-ingress-shim
@@ -426,6 +426,10 @@ rules:
   - apiGroups: ["cert-manager.io"]
     resources: ["certificates", "certificaterequests", "issuers"]
     verbs: ["get", "list", "watch"]
+  - apiGroups: ["acme.cert-manager.io"]
+    resources: ["challenges", "orders"]
+    verbs: ["get", "list", "watch"]
+
 
 ---
 
@@ -446,5 +450,8 @@ rules:
   - apiGroups: ["cert-manager.io"]
     resources: ["certificates", "certificaterequests", "issuers"]
     verbs: ["create", "delete", "deletecollection", "patch", "update"]
+  - apiGroups: ["acme.cert-manager.io"]
+    resources: ["challenges", "orders"]
+    verbs: ["get", "list", "watch"]
 
 {{- end }}
