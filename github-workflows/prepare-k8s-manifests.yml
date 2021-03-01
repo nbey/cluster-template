@@ -41,6 +41,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         # build PR description body
+        diff_size=$(stat -c%s /tmp/kube.diff)
         pr_head_describe="$(git describe --always --tag)"
 
         pr_body="$(cat <<EOF
@@ -49,7 +50,7 @@ jobs:
         \`kubectl diff\` reports that applying ${pr_head_describe} will change:
 
         \`\`\`diff
-        $(cat /tmp/kube.diff)
+        $(if (( diff_size > 50000)); then echo 'diff too big; review locally'; else cat /tmp/kube.diff; fi)
         \`\`\`
         EOF
         )"
