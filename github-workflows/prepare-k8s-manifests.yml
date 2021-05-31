@@ -24,6 +24,12 @@ jobs:
 
         echo "${{ secrets.KUBECONFIG_BASE64 }}" | base64 -d > ~/.kube/config
 
+    - name: Install kubectl-neat-diff
+      run: |
+        sudo wget https://github.com/sh0rez/kubectl-neat-diff/releases/download/v0.1.0/kubectl-neat-diff-linux-amd64 -O /usr/local/bin/kubectl-neat-diff
+        sudo chmod +x /usr/local/bin/kubectl-neat-diff
+        echo "KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff" >> $GITHUB_ENV
+
     - name: Generate diff
       run: |
         (
