@@ -39,12 +39,20 @@ spec:
       subresources:
         status: {}
       additionalPrinterColumns:
+        - jsonPath: .status.conditions[?(@.type=="Approved")].status
+          name: Approved
+          type: string
+        - jsonPath: .status.conditions[?(@.type=="Denied")].status
+          name: Denied
+          type: string
         - jsonPath: .status.conditions[?(@.type=="Ready")].status
           name: Ready
           type: string
         - jsonPath: .spec.issuerRef.name
           name: Issuer
-          priority: 1
+          type: string
+        - jsonPath: .spec.username
+          name: Requestor
           type: string
         - jsonPath: .status.conditions[?(@.type=="Ready")].message
           name: Status
@@ -81,6 +89,19 @@ spec:
                 duration:
                   description: The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.
                   type: string
+                extra:
+                  description: Extra contains extra attributes of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: object
+                  additionalProperties:
+                    type: array
+                    items:
+                      type: string
+                groups:
+                  description: Groups contains group membership of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: array
+                  items:
+                    type: string
+                  x-kubernetes-list-type: atomic
                 isCA:
                   description: IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.
                   type: boolean
@@ -99,6 +120,9 @@ spec:
                     name:
                       description: Name of the resource being referred to.
                       type: string
+                uid:
+                  description: UID contains the uid of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: string
                 usages:
                   description: Usages is the set of x509 usages that are requested for the certificate. Defaults to `digital signature` and `key encipherment` if not specified.
                   type: array
@@ -129,6 +153,9 @@ spec:
                       - ocsp signing
                       - microsoft sgc
                       - netscape sgc
+                username:
+                  description: Username contains the name of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: string
             status:
               description: Status of the CertificateRequest. This is set and managed automatically.
               type: object
@@ -169,7 +196,7 @@ spec:
                           - "False"
                           - Unknown
                       type:
-                        description: Type of the condition, known values are (`Ready`, `InvalidRequest`).
+                        description: Type of the condition, known values are (`Ready`, `InvalidRequest`, `Approved`, `Denied`).
                         type: string
                 failureTime:
                   description: FailureTime stores the time that this CertificateRequest failed. This is used to influence garbage collection and back-off.
@@ -181,12 +208,20 @@ spec:
       subresources:
         status: {}
       additionalPrinterColumns:
+        - jsonPath: .status.conditions[?(@.type=="Approved")].status
+          name: Approved
+          type: string
+        - jsonPath: .status.conditions[?(@.type=="Denied")].status
+          name: Denied
+          type: string
         - jsonPath: .status.conditions[?(@.type=="Ready")].status
           name: Ready
           type: string
         - jsonPath: .spec.issuerRef.name
           name: Issuer
-          priority: 1
+          type: string
+        - jsonPath: .spec.username
+          name: Requestor
           type: string
         - jsonPath: .status.conditions[?(@.type=="Ready")].message
           name: Status
@@ -223,6 +258,19 @@ spec:
                 duration:
                   description: The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.
                   type: string
+                extra:
+                  description: Extra contains extra attributes of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: object
+                  additionalProperties:
+                    type: array
+                    items:
+                      type: string
+                groups:
+                  description: Groups contains group membership of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: array
+                  items:
+                    type: string
+                  x-kubernetes-list-type: atomic
                 isCA:
                   description: IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.
                   type: boolean
@@ -241,6 +289,9 @@ spec:
                     name:
                       description: Name of the resource being referred to.
                       type: string
+                uid:
+                  description: UID contains the uid of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: string
                 usages:
                   description: Usages is the set of x509 usages that are requested for the certificate. Defaults to `digital signature` and `key encipherment` if not specified.
                   type: array
@@ -271,6 +322,9 @@ spec:
                       - ocsp signing
                       - microsoft sgc
                       - netscape sgc
+                username:
+                  description: Username contains the name of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: string
             status:
               description: Status of the CertificateRequest. This is set and managed automatically.
               type: object
@@ -311,7 +365,7 @@ spec:
                           - "False"
                           - Unknown
                       type:
-                        description: Type of the condition, known values are (`Ready`, `InvalidRequest`).
+                        description: Type of the condition, known values are (`Ready`, `InvalidRequest`, `Approved`, `Denied`).
                         type: string
                 failureTime:
                   description: FailureTime stores the time that this CertificateRequest failed. This is used to influence garbage collection and back-off.
@@ -323,12 +377,20 @@ spec:
       subresources:
         status: {}
       additionalPrinterColumns:
+        - jsonPath: .status.conditions[?(@.type=="Approved")].status
+          name: Approved
+          type: string
+        - jsonPath: .status.conditions[?(@.type=="Denied")].status
+          name: Denied
+          type: string
         - jsonPath: .status.conditions[?(@.type=="Ready")].status
           name: Ready
           type: string
         - jsonPath: .spec.issuerRef.name
           name: Issuer
-          priority: 1
+          type: string
+        - jsonPath: .spec.username
+          name: Requestor
           type: string
         - jsonPath: .status.conditions[?(@.type=="Ready")].message
           name: Status
@@ -363,6 +425,19 @@ spec:
                 duration:
                   description: The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.
                   type: string
+                extra:
+                  description: Extra contains extra attributes of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: object
+                  additionalProperties:
+                    type: array
+                    items:
+                      type: string
+                groups:
+                  description: Groups contains group membership of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: array
+                  items:
+                    type: string
+                  x-kubernetes-list-type: atomic
                 isCA:
                   description: IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.
                   type: boolean
@@ -385,6 +460,9 @@ spec:
                   description: The PEM-encoded x509 certificate signing request to be submitted to the CA for signing.
                   type: string
                   format: byte
+                uid:
+                  description: UID contains the uid of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: string
                 usages:
                   description: Usages is the set of x509 usages that are requested for the certificate. Defaults to `digital signature` and `key encipherment` if not specified.
                   type: array
@@ -415,6 +493,9 @@ spec:
                       - ocsp signing
                       - microsoft sgc
                       - netscape sgc
+                username:
+                  description: Username contains the name of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: string
             status:
               description: Status of the CertificateRequest. This is set and managed automatically.
               type: object
@@ -455,7 +536,7 @@ spec:
                           - "False"
                           - Unknown
                       type:
-                        description: Type of the condition, known values are (`Ready`, `InvalidRequest`).
+                        description: Type of the condition, known values are (`Ready`, `InvalidRequest`, `Approved`, `Denied`).
                         type: string
                 failureTime:
                   description: FailureTime stores the time that this CertificateRequest failed. This is used to influence garbage collection and back-off.
@@ -467,12 +548,20 @@ spec:
       subresources:
         status: {}
       additionalPrinterColumns:
+        - jsonPath: .status.conditions[?(@.type=="Approved")].status
+          name: Approved
+          type: string
+        - jsonPath: .status.conditions[?(@.type=="Denied")].status
+          name: Denied
+          type: string
         - jsonPath: .status.conditions[?(@.type=="Ready")].status
           name: Ready
           type: string
         - jsonPath: .spec.issuerRef.name
           name: Issuer
-          priority: 1
+          type: string
+        - jsonPath: .spec.username
+          name: Requestor
           type: string
         - jsonPath: .status.conditions[?(@.type=="Ready")].message
           name: Status
@@ -507,6 +596,19 @@ spec:
                 duration:
                   description: The requested 'duration' (i.e. lifetime) of the Certificate. This option may be ignored/overridden by some issuer types.
                   type: string
+                extra:
+                  description: Extra contains extra attributes of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: object
+                  additionalProperties:
+                    type: array
+                    items:
+                      type: string
+                groups:
+                  description: Groups contains group membership of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: array
+                  items:
+                    type: string
+                  x-kubernetes-list-type: atomic
                 isCA:
                   description: IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.
                   type: boolean
@@ -529,6 +631,9 @@ spec:
                   description: The PEM-encoded x509 certificate signing request to be submitted to the CA for signing.
                   type: string
                   format: byte
+                uid:
+                  description: UID contains the uid of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: string
                 usages:
                   description: Usages is the set of x509 usages that are requested for the certificate. If usages are set they SHOULD be encoded inside the CSR spec Defaults to `digital signature` and `key encipherment` if not specified.
                   type: array
@@ -559,6 +664,9 @@ spec:
                       - ocsp signing
                       - microsoft sgc
                       - netscape sgc
+                username:
+                  description: Username contains the name of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+                  type: string
             status:
               description: Status of the CertificateRequest. This is set and managed automatically.
               type: object
@@ -599,7 +707,7 @@ spec:
                           - "False"
                           - Unknown
                       type:
-                        description: Type of the condition, known values are (`Ready`, `InvalidRequest`).
+                        description: Type of the condition, known values are (`Ready`, `InvalidRequest`, `Approved`, `Denied`).
                         type: string
                 failureTime:
                   description: FailureTime stores the time that this CertificateRequest failed. This is used to influence garbage collection and back-off.
