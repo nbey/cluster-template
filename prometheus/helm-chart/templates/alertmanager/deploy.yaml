@@ -60,7 +60,7 @@ spec:
           args:
             - --config.file=/etc/config/{{ .Values.alertmanager.configFileName }}
             - --storage.path={{ .Values.alertmanager.persistentVolume.mountPath }}
-            - --cluster.advertise-address=$(POD_IP):6783
+            - --cluster.advertise-address=[$(POD_IP)]:6783
           {{- range $key, $value := .Values.alertmanager.extraArgs }}
             - --{{ $key }}={{ $value }}
           {{- end }}
@@ -107,11 +107,15 @@ spec:
         {{- end }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
-      {{ toYaml .Values.imagePullSecrets | indent 2 }}
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
     {{- end }}
     {{- if .Values.alertmanager.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.alertmanager.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- with .Values.alertmanager.dnsConfig }}
+      dnsConfig:
+{{ toYaml . | indent 8 }}
     {{- end }}
     {{- if .Values.alertmanager.securityContext }}
       securityContext:
@@ -138,6 +142,9 @@ spec:
         - name: {{ .name }}
           secret:
             secretName: {{ .secretName }}
+            {{- with .optional }}
+            optional: {{ . }}
+            {{- end }}
       {{- end }}
         - name: storage-volume
         {{- if .Values.alertmanager.persistentVolume.enabled }}
