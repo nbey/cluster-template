@@ -1,12 +1,12 @@
 # These values as applied first as template-provided defaults
 
 image:
-  tag: v1.3.2
+  tag: v1.5.3
 
 webhook:
   image:
-    tag: v1.3.2
+    tag: v1.5.3
 
 cainjector:
   image:
-    tag: v1.3.2
+    tag: v1.5.3
