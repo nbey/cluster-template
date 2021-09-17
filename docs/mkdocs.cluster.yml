@@ -1,4 +1,3 @@
 extra:
   cluster:
     wildcard_hostname: mycluster.k8s.example.net
-    cluster_issuer: letsencrypt-prod
