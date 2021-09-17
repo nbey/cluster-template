@@ -17,5 +17,5 @@ jobs:
     - name: 'Project gh-pages holobranch'
       uses: JarvusInnovations/hologit@actions/projector/v1
       with:
-        holobranch: gh-pages
+        holobranch: docs-site
         commit-to: gh-pages
