@@ -1,0 +1,21 @@
+name: Publish docs to gh-pages
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  HAB_LICENSE: accept-no-persist
+
+
+jobs:
+  publish-docs:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: 'Project gh-pages holobranch'
+      uses: JarvusInnovations/hologit@actions/projector/v1
+      with:
+        holobranch: gh-pages
+        commit-to: gh-pages

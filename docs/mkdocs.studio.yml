@@ -1,0 +1,4 @@
+extra:
+  studio:
+    name: cluster-template-studio
+    docs_port: 1705

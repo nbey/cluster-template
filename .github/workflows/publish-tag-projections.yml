@@ -1,4 +1,4 @@
-name: Update tag projections
+name: Publish tag projections
 
 on:
   push:
@@ -10,7 +10,7 @@ env:
 
 
 jobs:
-  update-tag-projections:
+  publish-tag-projections:
     runs-on: ubuntu-latest
     steps:
 

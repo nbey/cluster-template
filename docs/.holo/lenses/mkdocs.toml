@@ -1,0 +1,11 @@
+[hololens]
+package = "holo/lens-mkdocs"
+requirements = [
+    "mkdocs-material",
+    "mkdocs-awesome-pages-plugin",
+    "fontawesome_markdown",
+    "mkdocs-macros-plugin"
+]
+
+[hololens.output]
+merge = "replace"

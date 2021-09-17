@@ -1,0 +1,8 @@
+[holomapping]
+root = "docs"
+files = [
+    "**",
+    "!.holo/lenses/**",
+    "!mkdocs.yml",
+    "!mkdocs.*.yml",
+]

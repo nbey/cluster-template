@@ -1,0 +1,6 @@
+repo_url: https://github.com/JarvusInnovations/cluster-template
+
+extra:
+  repository:
+    name: cluster-template
+    url: git@github.com:JarvusInnovations/cluster-template.git
