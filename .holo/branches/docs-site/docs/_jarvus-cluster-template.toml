@@ -3,6 +3,7 @@ root = "docs"
 files = [
     "**",
     "!.holo/lenses/**",
+    "!requirements.txt",
     "!mkdocs.yml",
     "!mkdocs.*.yml",
 ]
