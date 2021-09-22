@@ -1,0 +1,4 @@
+[holomapping]
+holosource = "sealed-secrets"
+root = "helm/sealed-secrets"
+files = "**"
