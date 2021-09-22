@@ -34,6 +34,20 @@ data:
     --max-time 60 \
     -H "Accept: application/json" \
     -H "Content-Type: application/json;charset=UTF-8" \
+      "https://grafana.com/api/dashboards/9614/revisions/1/download" | sed '/-- .* --/! s/"datasource":.*,/"datasource": "Prometheus",/g'\
+    > "/var/lib/grafana/dashboards/default/ingress-nginx.json"
+    curl -skf \
+    --connect-timeout 60 \
+    --max-time 60 \
+    -H "Accept: application/json" \
+    -H "Content-Type: application/json;charset=UTF-8" \
+      "https://grafana.com/api/dashboards/13736/revisions/1/download" | sed '/-- .* --/! s/"datasource":.*,/"datasource": "Prometheus",/g'\
+    > "/var/lib/grafana/dashboards/default/ingress-nginx-daemonset.json"
+    curl -skf \
+    --connect-timeout 60 \
+    --max-time 60 \
+    -H "Accept: application/json" \
+    -H "Content-Type: application/json;charset=UTF-8" \
       "https://grafana.com/api/dashboards/1860/revisions/22/download" | sed '/-- .* --/! s/"datasource":.*,/"datasource": "Prometheus",/g'\
     > "/var/lib/grafana/dashboards/default/node-exporter.json"
     curl -skf \
