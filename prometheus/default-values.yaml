@@ -9,6 +9,10 @@ server:
   strategy:
     type: Recreate
 
+alertmanager:
+  strategy:
+    type: Recreate
+
 # nodeExporter:
 
 #   # allow exporter to run on all tainted nodes by default
