@@ -1,5 +1,8 @@
 # These values as applied first as template-provided defaults
 
+deploymentStrategy:
+  type: Recreate
+
 admin:
 
   # by configuring an existing secret, a random one will not be generated
