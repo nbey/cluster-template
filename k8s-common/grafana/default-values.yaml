@@ -48,6 +48,18 @@ dashboards:
       revision: 1
       datasource: Prometheus
 
+    ingress-nginx:
+      gnetId: 9614
+      revision: 1
+      datasource: Prometheus
+
+    ingress-nginx-daemonset:
+      gnetId: 13736
+      revision: 1
+      datasource: Prometheus
+
+
+
 persistence:
 
   enabled: true
