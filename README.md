@@ -113,15 +113,14 @@ git holo project k8s-manifests --commit-to=k8s/manifests
 
 ## GitHub Actions
 
-A GitHub Actions workflow can be used to automatically maintain a projected holobranch based on some branch that contains a definition of it. Using the holobranch name `k8s-manifests` as this repository and the above example do, this workflow will project it to the `k8s/manifests` branch every time the `master` branch is pushed:
+A GitHub Actions workflow can be used to automatically maintain a projected holobranch based on some branch that contains a definition of it. Using the holobranch name `k8s-manifests` as this repository and the above example do, this workflow will project it to the `k8s/manifests` branch every time the `main` branch is pushed:
 
 ```yaml
 name: k8s manifests
 
 on:
   push:
-    branches:
-      - 'master'
+    branches: [ main ]
 
 jobs:
   k8s-manifests:
