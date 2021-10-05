@@ -1,4 +1,4 @@
-# Setup
+# Grafana
 
 New clusters will start with the `grafana` deployment blocked from starting a pod for lack of the `grafana-initial-admin` secret existing.
 
