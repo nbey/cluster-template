@@ -9,19 +9,21 @@
       
       
       
-      <link rel="icon" href="/cluster-template/assets/images/favicon.png">
+        <link rel="canonical" href="https://jarvusinnovations.github.io/cluster-template/getting-started/service-setup/sealed-secrets/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.1">
     
     
       
-        <title>Cluster Template</title>
+        <title>Sealed Secrets - Cluster Template</title>
       
     
     
-      <link rel="stylesheet" href="/cluster-template/assets/stylesheets/main.1c75ef36.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1c75ef36.min.css">
       
         
-        <link rel="stylesheet" href="/cluster-template/assets/stylesheets/palette.3f5d1f46.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
         
           
           
@@ -59,12 +61,17 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="light-blue" data-md-color-accent="amber">
   
     
-    <script>function __prefix(e){return new URL("/cluster-template/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#sealed-secrets" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -75,7 +82,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/cluster-template/." title="Cluster Template" class="md-header__button md-logo" aria-label="Cluster Template" data-md-component="logo">
+    <a href="../../.." title="Cluster Template" class="md-header__button md-logo" aria-label="Cluster Template" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -94,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Sealed Secrets
             
           </span>
         </div>
@@ -171,7 +178,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="/cluster-template/." class="md-tabs__link">
+    <a href="../../.." class="md-tabs__link">
       Cluster Documentation
     </a>
   </li>
@@ -180,13 +187,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="/cluster-template/getting-started/" class="md-tabs__link">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         Getting started
       </a>
     </li>
@@ -202,7 +211,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/cluster-template/development/" class="md-tabs__link">
+      <a href="../../../development/" class="md-tabs__link">
         Development
       </a>
     </li>
@@ -230,7 +239,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/cluster-template/." title="Cluster Template" class="md-nav__button md-logo" aria-label="Cluster Template" data-md-component="logo">
+    <a href="../../.." title="Cluster Template" class="md-nav__button md-logo" aria-label="Cluster Template" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -262,7 +271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cluster-template/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         Cluster Documentation
       </a>
     </li>
@@ -275,12 +284,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       
       
@@ -303,7 +314,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cluster-template/getting-started/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         Getting Started
       </a>
     </li>
@@ -315,12 +326,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
       
       
       
@@ -343,7 +356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cluster-template/getting-started/service-setup/grafana/" class="md-nav__link">
+      <a href="../grafana/" class="md-nav__link">
         Grafana
       </a>
     </li>
@@ -355,11 +368,51 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/cluster-template/getting-started/service-setup/sealed-secrets/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Sealed Secrets
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Sealed Secrets
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#back-up-generated-keys" class="md-nav__link">
+    Back up generated keys
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -412,7 +465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cluster-template/development/" class="md-nav__link">
+      <a href="../../../development/" class="md-nav__link">
         Development
       </a>
     </li>
@@ -452,7 +505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cluster-template/development/features/ingress/" class="md-nav__link">
+      <a href="../../../development/features/ingress/" class="md-nav__link">
         Ingress
       </a>
     </li>
@@ -480,11 +533,69 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#back-up-generated-keys" class="md-nav__link">
+    Back up generated keys
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
-  <h1>404 - Not found</h1>
+                
+                  <a href="https://github.com/JarvusInnovations/cluster-template/edit/main/docs/getting-started/service-setup/sealed-secrets.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="sealed-secrets">Sealed Secrets<a class="headerlink" href="#sealed-secrets" title="Permanent link"> ¶</a></h1>
+<p>The <a href="https://github.com/bitnami-labs/sealed-secrets">sealed-secrets</a> controller will automatically generate a public+private keypair for each cluster that will be used to encrypt and decrypt secrets.</p>
+<p>After any new cluster is provisioned, the generated keypair should be backed up externally (i.e. to a shared VaultWarden/BitWarden collection). With the keypair backed up, secrets can be <a href="https://github.com/bitnami-labs/sealed-secrets#can-i-decrypt-my-secrets-offline-with-a-backup-key">decrypted locally</a> or <a href="https://github.com/bitnami-labs/sealed-secrets#can-i-bring-my-own-pre-generated-certificates">restored to a new cluster</a> in the future.</p>
+<h2 id="back-up-generated-keys">Back up generated keys<a class="headerlink" href="#back-up-generated-keys" title="Permanent link"> ¶</a></h2>
+<p><a href="https://github.com/bitnami-labs/sealed-secrets#can-i-decrypt-my-secrets-offline-with-a-backup-key">From the <code>sealed-secrets</code> README.md</a>:</p>
+<div class="highlight"><pre><span></span><code>kubectl get secret <span class="se">\</span>
+    -n sealed-secrets <span class="se">\</span>
+    -l sealedsecrets.bitnami.com/sealed-secrets-key <span class="se">\</span>
+    -o yaml <span class="se">\</span>
+&gt; cluster-sealed-secrets-master.key
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Sensitive data!</p>
+<p>Be sure to keep this file secure and delete from your working directory after uploading it to a secure credentials vault for backup.</p>
+<p><strong>Do not commit this file to source control</strong></p>
+</div>
+                
+              
+              
+                
+
 
               
             </article>
@@ -495,6 +606,41 @@
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../grafana/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Grafana" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Grafana
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../../development/" class="md-footer__link md-footer__link--next" aria-label="Next: Development" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Development
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -517,10 +663,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "/cluster-template/", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "/cluster-template/assets/javascripts/workers/search.e99e714c.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.e99e714c.min.js", "version": null}</script>
     
     
-      <script src="/cluster-template/assets/javascripts/bundle.c7d1b464.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c7d1b464.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@8.5.0/dist/mermaid.min.js"></script>
       
