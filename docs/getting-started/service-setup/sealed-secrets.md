@@ -21,3 +21,31 @@ kubectl get secret \
     Be sure to keep this file secure and delete from your working directory after uploading it to a secure credentials vault for backup.
 
     **Do not commit this file to source control**
+
+## Enable ingress
+
+The `sealed-secrets` helm chart includes an ingress that can be configured to provide a public URL to the cluster's public certificate that can be used for local `kubeseal` client operations.
+
+To enable the ingress, configure and deploy `sealed-secrets/release-values.yaml`:
+
+=== "sealed-secrets/release-values.yaml"
+
+    ```yaml
+    ingress:
+    enabled: true
+    annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: {{ cluster.cluster_issuer }}
+    hosts:
+        - sealed-secrets.{{ cluster.wildcard_hostname }}
+    tls:
+        - secretName: sealed-secrets-tls
+        hosts:
+            - sealed-secrets.{{ cluster.wildcard_hostname }}
+    ```
+
+Once deployed, local `kubeseal` clients can be configured to use it by setting the `SEALED_SECRETS_CERT` environment variable:
+
+```bash
+export SEALED_SECRETS_CERT=https://sealed-secrets.{{ cluster.wildcard_hostname }}/v1/cert.pem
+```
