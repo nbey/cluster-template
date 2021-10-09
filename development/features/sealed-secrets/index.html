@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://jarvusinnovations.github.io/cluster-template/development/features/ingress/">
+        <link rel="canonical" href="https://jarvusinnovations.github.io/cluster-template/development/features/sealed-secrets/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.2">
     
     
       
-        <title>Ingress - Cluster Template</title>
+        <title>Sealed Secrets - Cluster Template</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ingress" class="md-skip">
+        <a href="#sealed-secrets" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ingress
+              Sealed Secrets
             
           </span>
         </div>
@@ -463,6 +463,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../ingress/" class="md-nav__link">
+        Ingress
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -475,12 +489,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Ingress
+          Sealed Secrets
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Ingress
+        Sealed Secrets
       </a>
       
         
@@ -498,8 +512,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#exposing-services" class="md-nav__link">
-    Exposing services
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-public-certificate" class="md-nav__link">
+    Configure public certificate
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encrypt-secrets-to-cluster-repository" class="md-nav__link">
+    Encrypt secrets to cluster repository
   </a>
   
 </li>
@@ -508,20 +536,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../sealed-secrets/" class="md-nav__link">
-        Sealed Secrets
-      </a>
     </li>
   
 
@@ -566,8 +580,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#exposing-services" class="md-nav__link">
-    Exposing services
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-public-certificate" class="md-nav__link">
+    Configure public certificate
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encrypt-secrets-to-cluster-repository" class="md-nav__link">
+    Encrypt secrets to cluster repository
   </a>
   
 </li>
@@ -584,22 +612,28 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/JarvusInnovations/cluster-template/edit/main/docs/development/features/ingress.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/JarvusInnovations/cluster-template/edit/main/docs/development/features/sealed-secrets.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="ingress">Ingress<a class="headerlink" href="#ingress" title="Permanent link"> ¶</a></h1>
-<h2 id="exposing-services">Exposing services<a class="headerlink" href="#exposing-services" title="Permanent link"> ¶</a></h2>
-<p><code>*.mycluster.k8s.example.net</code> should be configured to resolve to the cluster&rsquo;s <code>ingress-nginx</code> service.</p>
-<p>To route a public hostname to a service in the cluster:</p>
-<ol>
-<li>Create an Ingress</li>
-<li>Apply the annotation <code>kubernetes.io/ingress.class: nginx</code> to associate with the cluster&rsquo;s main ingress service</li>
-<li>Apply the annotation <code>cert-manager.io/cluster-issuer: letsencrypt-prod</code> to enable automatic setup of an SSL certificate</li>
-<li>Assign an unused hostname under <code>.mycluster.k8s.example.net</code> (every public service should start with one of these)</li>
-<li>Optionally, CNAME a custom hostname to the <code>.mycluster.k8s.example.net</code> hostname and add it to the same ingress</li>
-</ol>
+                <h1 id="sealed-secrets">Sealed Secrets<a class="headerlink" href="#sealed-secrets" title="Permanent link"> ¶</a></h1>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link"> ¶</a></h2>
+<ul>
+<li><a href="../../../getting-started/service-setup/sealed-secrets/">Configure and deploy a public ingress for sealed-secrets on the cluster</a></li>
+<li>Install the <code>kubeseal</code> client command on your local workstation from the latest stable release: <a href="https://github.com/bitnami-labs/sealed-secrets/releases">https://github.com/bitnami-labs/sealed-secrets/releases</a></li>
+</ul>
+<h2 id="configure-public-certificate">Configure public certificate<a class="headerlink" href="#configure-public-certificate" title="Permanent link"> ¶</a></h2>
+<p>Place the public URL for the target cluster&rsquo;s sealed secret&rsquo;s certificate into the <code>SEALED_SECRETS_CERT</code> environment variable:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">SEALED_SECRETS_CERT</span><span class="o">=</span>https://sealed-secrets.mycluster.k8s.example.net/v1/cert.pem
+</code></pre></div>
+<h2 id="encrypt-secrets-to-cluster-repository">Encrypt secrets to cluster repository<a class="headerlink" href="#encrypt-secrets-to-cluster-repository" title="Permanent link"> ¶</a></h2>
+<p>Create a Kubernetes <code>Secret</code> manifest containing one or more key+value pair, and then use the <code>kubeseal</code> client to encrypt it into a <code>SealedSecret</code> manifest. The target namespace must be provided and will become part of the encryption such that the secret can only be loaded into that namespace. Commit the sealed secret to the cluster&rsquo;s repository under the path <code>${project_namespace}.secrets/</code> where it will be added to the cluster&rsquo;s deployed manifests:</p>
+<div class="highlight"><pre><span></span><code>kubeseal <span class="se">\</span>
+    --namespace <span class="s2">&quot;my-project&quot;</span> <span class="se">\</span>
+    -f my-secret.yaml <span class="se">\</span>
+    -w ~/Repositories/my-cluster/my-project.secrets/my-secret.yaml
+</code></pre></div>
                 
               
               
@@ -619,7 +653,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Development" rel="prev">
+        <a href="../ingress/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Ingress" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -628,26 +662,11 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Development
+              Ingress
             </div>
           </div>
         </a>
       
-      
-        
-        <a href="../sealed-secrets/" class="md-footer__link md-footer__link--next" aria-label="Next: Sealed Secrets" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Sealed Secrets
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
       
     </nav>
   
