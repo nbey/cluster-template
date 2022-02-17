@@ -1,0 +1,7 @@
+[holomapping]
+holosource = "grafana"
+root = "charts/loki-stack"
+files = [
+  "**",
+  "!templates/tests/**"
+]
