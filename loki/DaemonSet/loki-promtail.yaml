@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations: {}
+  labels:
+    app: promtail
+    chart: promtail-2.2.0
+    heritage: Helm
+    release: loki
+  name: loki-promtail
+  namespace: loki
+spec:
+  selector:
+    matchLabels:
+      app: promtail
+      release: loki
+  template:
+    metadata:
+      annotations:
+        checksum/config: 8c87a13d751c87f1b8726a725bffbe18c827c5e60d4a7aea47cd4871ea8271f3
+        prometheus.io/port: http-metrics
+        prometheus.io/scrape: 'true'
+      labels:
+        app: promtail
+        release: loki
+    spec:
+      affinity: {}
+      containers:
+        - args:
+            - '-config.file=/etc/promtail/promtail.yaml'
+            - '-client.url=http://loki:3100/loki/api/v1/push'
+          env:
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          image: 'grafana/promtail:2.1.0'
+          imagePullPolicy: IfNotPresent
+          name: promtail
+          ports:
+            - containerPort: 3101
+              name: http-metrics
+          readinessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /ready
+              port: http-metrics
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsGroup: 0
+            runAsUser: 0
+          volumeMounts:
+            - mountPath: /etc/promtail
+              name: config
+            - mountPath: /run/promtail
+              name: run
+            - mountPath: /var/lib/docker/containers
+              name: docker
+              readOnly: true
+            - mountPath: /var/log/pods
+              name: pods
+              readOnly: true
+      nodeSelector: {}
+      serviceAccountName: loki-promtail
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+          operator: Exists
+      volumes:
+        - configMap:
+            name: loki-promtail
+          name: config
+        - hostPath:
+            path: /run/promtail
+          name: run
+        - hostPath:
+            path: /var/lib/docker/containers
+          name: docker
+        - hostPath:
+            path: /var/log/pods
+          name: pods
+  updateStrategy: {}

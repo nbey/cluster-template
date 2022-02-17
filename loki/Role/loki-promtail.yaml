@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app: promtail
+    chart: promtail-2.2.0
+    heritage: Helm
+    release: loki
+  name: loki-promtail
+  namespace: loki
+rules:
+  - apiGroups:
+      - extensions
+    resourceNames:
+      - loki-promtail
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - use
