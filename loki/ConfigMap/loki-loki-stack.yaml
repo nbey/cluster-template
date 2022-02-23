@@ -12,7 +12,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: loki-stack
-    chart: loki-stack-2.4.1
+    chart: loki-stack-2.6.1
     grafana_datasource: '1'
     heritage: Helm
     release: loki
