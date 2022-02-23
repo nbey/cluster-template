@@ -4,7 +4,7 @@ metadata:
   annotations: {}
   labels:
     app: loki
-    chart: loki-2.9.2
+    chart: loki-2.10.1
     heritage: Helm
     release: loki
   name: loki
