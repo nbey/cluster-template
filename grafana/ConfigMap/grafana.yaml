@@ -18,6 +18,11 @@ data:
       name: Prometheus
       type: prometheus
       url: http://prometheus-server.prometheus.svc.cluster.local
+    - access: proxy
+      name: Loki
+      type: loki
+      url: http://loki.loki.svc.cluster.local:3100
+      version: 1
   download_dashboards.sh: |
     #!/usr/bin/env sh
     set -euf
