@@ -1,6 +1,6 @@
 [holomapping]
 holosource = "grafana"
-root = "charts/loki-stack"
+root = "charts/loki"
 files = [
   "**",
   "!templates/tests/**"
