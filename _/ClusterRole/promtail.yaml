@@ -2,11 +2,12 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app: promtail
-    chart: promtail-2.2.0
-    heritage: Helm
-    release: loki
-  name: loki-promtail-clusterrole
+    app.kubernetes.io/instance: promtail
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: promtail
+    app.kubernetes.io/version: 2.4.2
+    helm.sh/chart: promtail-3.11.0
+  name: promtail
 rules:
   - apiGroups:
       - ''
