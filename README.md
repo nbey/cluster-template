@@ -2,6 +2,13 @@
 
 This template provides a common foundation for lightweight k8s clusters.
 
+## Kubernetes version
+
+Currently supported Kubernetes API versions:
+
+- 1.21
+- 1.22
+
 ## Getting started
 
 The `.holo/branches/k8s-manifests` tree defines a holobranch named `k8s-manifests`, which can be projected with the [`git-holo`](https://github.com/JarvusInnovations/hologit) tool:
