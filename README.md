@@ -4,7 +4,10 @@ This template provides a common foundation for lightweight k8s clusters.
 
 ## Kubernetes version
 
-The current release targets **Kubernetes 1.22**
+Currently supported Kubernetes API versions:
+
+- 1.21
+- 1.22
 
 ## Getting started
 
