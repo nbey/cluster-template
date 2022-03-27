@@ -9,14 +9,35 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/version: v1.7.2
     helm.sh/chart: cert-manager-v1.7.2
-  name: 'cert-manager-controller-approve:cert-manager-io'
+  name: cert-manager-controller-certificatesigningrequests
 rules:
   - apiGroups:
-      - cert-manager.io
+      - certificates.k8s.io
+    resources:
+      - certificatesigningrequests
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+  - apiGroups:
+      - certificates.k8s.io
+    resources:
+      - certificatesigningrequests/status
+    verbs:
+      - update
+  - apiGroups:
+      - certificates.k8s.io
     resourceNames:
       - issuers.cert-manager.io/*
       - clusterissuers.cert-manager.io/*
     resources:
       - signers
     verbs:
-      - approve
+      - sign
+  - apiGroups:
+      - authorization.k8s.io
+    resources:
+      - subjectaccessreviews
+    verbs:
+      - create
