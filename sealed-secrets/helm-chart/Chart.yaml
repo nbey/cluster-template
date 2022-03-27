@@ -1,25 +1,19 @@
-name: sealed-secrets
-description: Helm chart for the sealed-secrets controller.
-
-##############################
-# Important versioning rules #
-##############################
-#
-# Please keep the chart version in sync with the app version
-# and use -rN suffixes (e.g. -r2)
-#
-# Since the helm chart started with 1 and we don't want discontinuities,
-# for a while the helm chart version will be 1.x.y and the appVersion 0.x.y
-#
-
-version: 1.15.0-r3
-appVersion: v0.15.0
-
-icon: https://avatars0.githubusercontent.com/u/34656521?s=200&v=4
-kubeVersion: ">=1.16.0-0"
-home: https://github.com/bitnami-labs/sealed-secrets
+annotations:
+  category: DeveloperTools
 apiVersion: v2
-type: application
+appVersion: v0.17.2
+description: Helm chart for the sealed-secrets controller.
+home: https://github.com/bitnami-labs/sealed-secrets
+icon: https://bitnami.com/assets/stacks/sealed-secrets/img/sealed-secrets-stack-220x234.png
+keywords:
+  - secrets
+  - sealed-secrets
+kubeVersion: ">=1.16.0-0"
 maintainers:
-- name: mkmik
-  email: mmikulicic@gmail.com
+  - email: containers@bitnami.com
+    name: Bitnami
+  - name: mkmik
+    email: mmikulicic@gmail.com
+name: sealed-secrets
+type: application
+version: 2.1.1
