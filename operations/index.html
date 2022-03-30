@@ -8,21 +8,21 @@
       
       
       
-        <link rel="canonical" href="https://jarvusinnovations.github.io/cluster-template/getting-started/service-setup/grafana/">
+        <link rel="canonical" href="https://jarvusinnovations.github.io/cluster-template/operations/">
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
     
     
       
-        <title>Grafana - Cluster Template</title>
+        <title>Operations - Cluster Template</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.644de097.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.644de097.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
         
           
           
@@ -43,7 +43,7 @@
     
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#grafana" class="md-skip">
+        <a href="#operations" class="md-skip">
           Skip to content
         </a>
       
@@ -81,7 +81,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Cluster Template" class="md-header__button md-logo" aria-label="Cluster Template" data-md-component="logo">
+    <a href=".." title="Cluster Template" class="md-header__button md-logo" aria-label="Cluster Template" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Grafana
+              Operations
             
           </span>
         </div>
@@ -175,7 +175,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../.." class="md-tabs__link">
+    <a href=".." class="md-tabs__link">
       Cluster Documentation
     </a>
   </li>
@@ -184,15 +184,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../" class="md-tabs__link md-tabs__link--active">
+      <a href="../getting-started/" class="md-tabs__link">
         Getting started
       </a>
     </li>
@@ -208,7 +206,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../development/" class="md-tabs__link">
+      <a href="../development/" class="md-tabs__link">
         Development
       </a>
     </li>
@@ -218,13 +216,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../../operations/" class="md-tabs__link">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
         Operations
       </a>
     </li>
@@ -252,7 +252,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Cluster Template" class="md-nav__button md-logo" aria-label="Cluster Template" data-md-component="logo">
+    <a href=".." title="Cluster Template" class="md-nav__button md-logo" aria-label="Cluster Template" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -283,7 +283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         Cluster Documentation
       </a>
     </li>
@@ -296,14 +296,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
       
       
       
@@ -326,7 +324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../getting-started/" class="md-nav__link">
         Getting Started
       </a>
     </li>
@@ -338,14 +336,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
       
       
       
@@ -366,52 +362,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Grafana
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../getting-started/service-setup/grafana/" class="md-nav__link">
         Grafana
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#creating-grafana-admin-secret" class="md-nav__link">
-    Creating grafana-admin-secret
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -423,7 +378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sealed-secrets/" class="md-nav__link">
+      <a href="../getting-started/service-setup/sealed-secrets/" class="md-nav__link">
         Sealed Secrets
       </a>
     </li>
@@ -478,7 +433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/" class="md-nav__link">
+      <a href="../development/" class="md-nav__link">
         Development
       </a>
     </li>
@@ -518,7 +473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/features/ingress/" class="md-nav__link">
+      <a href="../development/features/ingress/" class="md-nav__link">
         Ingress
       </a>
     </li>
@@ -532,7 +487,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/features/sealed-secrets/" class="md-nav__link">
+      <a href="../development/features/sealed-secrets/" class="md-nav__link">
         Sealed Secrets
       </a>
     </li>
@@ -559,12 +514,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
@@ -585,11 +542,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../../operations/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Operations
       </a>
+      
     </li>
   
 
@@ -627,7 +594,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../operations/upgrades/to-0.20/" class="md-nav__link">
+      <a href="upgrades/to-0.20/" class="md-nav__link">
         To 0.20.x
       </a>
     </li>
@@ -668,21 +635,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#creating-grafana-admin-secret" class="md-nav__link">
-    Creating grafana-admin-secret
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -693,21 +645,21 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/JarvusInnovations/cluster-template/edit/main/docs/getting-started/service-setup/grafana.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/JarvusInnovations/cluster-template/edit/main/docs/operations/README.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
 
-<h1 id="grafana">Grafana<a class="headerlink" href="#grafana" title="Permanent link"> ¶</a></h1>
-<p>New clusters will start with the <code>grafana</code> deployment blocked from starting a pod for lack of the <code>grafana-initial-admin</code> secret existing.</p>
-<p>Creating this secret will enable <code>grafana</code> to start up and create an initial admin login. The secret should be left on the cluster after that as the deployment requires it, but making changes to it will not update any Grafana login unless Grafana&rsquo;s persistent storage is reset.</p>
-<h2 id="creating-grafana-admin-secret">Creating <code>grafana-admin-secret</code><a class="headerlink" href="#creating-grafana-admin-secret" title="Permanent link"> ¶</a></h2>
-<p>Use this command to generate a usable secret with a random password:</p>
-<div class="highlight"><pre><span></span><code>kubectl -n grafana create secret generic grafana-initial-admin <span class="se">\</span>
-    --from-literal<span class="o">=</span>admin-user<span class="o">=</span>admin <span class="se">\</span>
-    --from-literal<span class="o">=</span>admin-password<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nv">LC_ALL</span><span class="o">=</span>C &lt;/dev/urandom tr -dc <span class="s1">&#39;[:alnum:]_&#39;</span> <span class="p">|</span> head -c <span class="m">32</span><span class="k">)</span><span class="s2">&quot;</span>
-</code></pre></div>
+<h1 id="operations">Operations<a class="headerlink" href="#operations" title="Permanent link"> ¶</a></h1>
+<p>The <strong>Operations</strong> section provides content covering:</p>
+<ul>
+<li>Upgrading cluster components</li>
+<li>Building hosted environments</li>
+<li>Maintaining hosted environments</li>
+<li>Backing up and restoring content</li>
+<li>Monitoring system health</li>
+</ul>
 
               
             </article>
@@ -721,7 +673,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Started" rel="prev">
+        <a href="../development/features/sealed-secrets/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Sealed Secrets" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -730,20 +682,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Getting Started
+              Sealed Secrets
             </div>
           </div>
         </a>
       
       
         
-        <a href="../sealed-secrets/" class="md-footer__link md-footer__link--next" aria-label="Next: Sealed Secrets" rel="next">
+        <a href="upgrades/to-0.20/" class="md-footer__link md-footer__link--next" aria-label="Next: To 0.20.x" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Sealed Secrets
+              To 0.20.x
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -773,10 +725,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "search": "../../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs"], "search": "../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.c44cc438.min.js"></script>
+      <script src="../assets/javascripts/bundle.c44cc438.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@8.5.0/dist/mermaid.min.js"></script>
       

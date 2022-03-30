@@ -2,37 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://jarvusinnovations.github.io/cluster-template/</loc>
-         <lastmod>2022-03-26</lastmod>
+         <lastmod>2022-03-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jarvusinnovations.github.io/cluster-template/development/</loc>
-         <lastmod>2022-03-26</lastmod>
+         <lastmod>2022-03-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jarvusinnovations.github.io/cluster-template/development/features/ingress/</loc>
-         <lastmod>2022-03-26</lastmod>
+         <lastmod>2022-03-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jarvusinnovations.github.io/cluster-template/development/features/sealed-secrets/</loc>
-         <lastmod>2022-03-26</lastmod>
+         <lastmod>2022-03-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jarvusinnovations.github.io/cluster-template/getting-started/</loc>
-         <lastmod>2022-03-26</lastmod>
+         <lastmod>2022-03-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jarvusinnovations.github.io/cluster-template/getting-started/service-setup/grafana/</loc>
-         <lastmod>2022-03-26</lastmod>
+         <lastmod>2022-03-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jarvusinnovations.github.io/cluster-template/getting-started/service-setup/sealed-secrets/</loc>
-         <lastmod>2022-03-26</lastmod>
+         <lastmod>2022-03-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jarvusinnovations.github.io/cluster-template/operations/</loc>
+         <lastmod>2022-03-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jarvusinnovations.github.io/cluster-template/operations/upgrades/to-0.20/</loc>
+         <lastmod>2022-03-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
