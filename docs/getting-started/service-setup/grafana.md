@@ -11,5 +11,5 @@ Use this command to generate a usable secret with a random password:
 ```bash
 kubectl -n grafana create secret generic grafana-initial-admin \
     --from-literal=admin-user=admin \
-    --from-literal=admin-password="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
+    --from-literal=admin-password="$(LC_ALL=C </dev/urandom tr -dc '[:alnum:]_' | head -c 32)"
 ```
