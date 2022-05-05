@@ -19,7 +19,7 @@ index ebd08997..8dba5834 100644
 
 ## Upgrade `cert-manager` CRDs
 
-If migrating from a pre-1.0 versionof `cert-manager` to a post-1.0 version, you may need [to manually delete all CRDs](https://cert-manager.io/docs/installation/upgrading/upgrading-0.16-1.0/#kubernetes-1-14-and-below)
+If migrating from a pre-1.0 version of `cert-manager` to a post-1.0 version, you may need [to manually delete all CRDs](https://cert-manager.io/docs/installation/upgrading/upgrading-0.16-1.0/#kubernetes-1-14-and-below)
 
 ## Upgrade `sealed-secrets` ingress config
 
