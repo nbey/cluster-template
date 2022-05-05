@@ -7,4 +7,4 @@ tolerations:
 
  # run on all nodes by default
  - operator: Exists
-     effect: NoSchedule
+   effect: NoSchedule
