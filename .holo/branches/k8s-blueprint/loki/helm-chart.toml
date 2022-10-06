@@ -1,5 +1,5 @@
 [holomapping]
-holosource = "grafana"
+holosource = "loki"
 root = "charts/loki"
 files = [
   "**",
