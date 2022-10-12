@@ -3,7 +3,7 @@
 
 test -e ~/.kube || mkdir ~/.kube
 
-echo "${{ secrets.KUBECONFIG_BASE64 }}" | base64 -d > ~/.kube/config
+echo "${KUBE_CONFIG_BASE64}" | base64 -d > ~/.kube/config
 
 # initialize empty log of kube operations
 echo -n '' > /tmp/kube.log
@@ -56,7 +56,7 @@ metadata:
   namespace: ${namespace}
 type: kubernetes.io/dockerconfigjson
 data:
-  .dockerconfigjson: ${{ secrets.DOCKER_CONFIG_BASE64 }}
+  .dockerconfigjson: ${DOCKER_CONFIG_BASE64}
 EOF
 done <<< "$(find . -maxdepth 1 -type d -not -name '_' -not -name '.*')"
 

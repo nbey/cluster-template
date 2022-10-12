@@ -1,14 +1,21 @@
 name: 'K8s: Deploy k8s-manifests'
 description: 'Deploy k8s manifests to cluster via GH action'
 inputs:
-  branch-deploy:  # id of input
+  branch-deploy:
     description: 'Which k8s-manifests branch to k8s cluster from'
     required: true
     default: 'deploys/k8s-manifests'
-  branch-release:  # id of input
+  branch-release:
     description: 'Used to determine which pull request should be updated with a comment containing a log of the manifests being applied'
     required: true
     default: 'releases/k8s-manifests'
+  kube-config-base64:
+    description: 'Base64 encoded kubeconfig file for connecting to the cluster'
+    required: true
+  docker-config-base64:
+    description: 'Base64 encoded docker config file for setting up GH credentials in the cluster'
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -22,6 +29,8 @@ runs:
       env:
         BRANCH_DEPLOY: $ {{ inputs.branch-deploy }}
         BRANCH_RELEASE: $ {{ inputs.branch-release }}
+        KUBE_CONFIG_BASE64: $ {{ inputs.kube-config-base64 }}
+        DOCKER_CONFIG_BASE64: $ {{ inputs.docker-config-base64 }}
       shell: bash
     - run: echo "Completing K8s: Deploy k8s-manifests action"
       shell: bash
