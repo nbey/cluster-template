@@ -1,0 +1,27 @@
+name: 'K8s: Deploy k8s-manifests'
+description: 'Deploy k8s manifests to cluster via GH action'
+inputs:
+  branch-deploy:  # id of input
+    description: 'Which k8s-manifests branch to k8s cluster from'
+    required: true
+    default: 'deploys/k8s-manifests'
+  branch-release:  # id of input
+    description: 'Used to determine which pull request should be updated with a comment containing a log of the manifests being applied'
+    required: true
+    default: 'releases/k8s-manifests'
+runs:
+  using: "composite"
+  steps:
+    - run: echo "Beginning K8s: Deploy k8s-manifests action"
+      shell: bash
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ inputs.branch-deploy }}
+        fetch-depth: 2 # need parent commit to detect deletions
+    - run:  deploy.sh
+      env:
+        BRANCH_DEPLOY: $ {{ inputs.branch-deploy }}
+        BRANCH_RELEASE: $ {{ inputs.branch-release }}
+      shell: bash
+    - run: echo "Completing K8s: Deploy k8s-manifests action"
+      shell: bash
