@@ -19,18 +19,20 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo "Beginning K8s: Deploy k8s-manifests action"
+    - run: |
+       echo "Beginning K8s: Deploy k8s-manifests action"
       shell: bash
     - uses: actions/checkout@v2
       with:
         ref: ${{ inputs.branch-deploy }}
         fetch-depth: 2 # need parent commit to detect deletions
-    - run:  deploy.sh
+    - run: deploy.sh
       env:
-        BRANCH_DEPLOY: $ {{ inputs.branch-deploy }}
-        BRANCH_RELEASE: $ {{ inputs.branch-release }}
-        KUBE_CONFIG_BASE64: $ {{ inputs.kube-config-base64 }}
-        DOCKER_CONFIG_BASE64: $ {{ inputs.docker-config-base64 }}
+        BRANCH_DEPLOY: ${{ inputs.branch-deploy }}
+        BRANCH_RELEASE: ${{ inputs.branch-release }}
+        KUBE_CONFIG_BASE64: ${{ inputs.kube-config-base64 }}
+        DOCKER_CONFIG_BASE64: ${{ inputs.docker-config-base64 }}
       shell: bash
-    - run: echo "Completing K8s: Deploy k8s-manifests action"
+    - run: |
+        echo "Completing K8s: Deploy k8s-manifests action"
       shell: bash
