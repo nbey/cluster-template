@@ -20,8 +20,6 @@ runs:
     # todo: rename bash script to restore.sh
     - run: restore.sh
       env:
-        BRANCH_DEPLOY: ${{ inputs.branch-deploy }}
-        BRANCH_RELEASE: ${{ inputs.branch-release }}
-        KUBE_CONFIG_BASE64: ${{ inputs.kube-config-base64 }}
-        DOCKER_CONFIG_BASE64: ${{ inputs.docker-config-base64 }}
+        RESTIC_PASSWORD: ${{ inputs.restic-password }}
+
       shell: bash
