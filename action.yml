@@ -1,11 +1,31 @@
 name: 'K8s: Deploy k8s-manifests'
 description: 'Deploy k8s manifests to cluster via GH action'
 inputs:
-  restic-password:
-    description: 'Supply restic password'
+  aws-access-key-id:
+    description: 'Supply AWS Access Key ID'
     required: true
-    
-   # todo: add the other input variables
+  aws-secret-access-key:
+    description: 'Supply AWS Secret Access Key'
+    required: true
+  restic-repository:
+    description: 'Supply Restic Repository config'
+    required: true
+  restic-password:
+    description: 'Supply Restic Password config'
+    required: true
+  db-host:
+    description: 'Supply database host'
+    required: true
+  db-database:
+    description: 'Supply database name'
+    required: true
+  db-username:
+    description: 'Supply database username'
+    required: true
+  db-password:
+    description: 'Supply database password'
+    required: true
+
 
 runs:
   using: "composite"
@@ -17,9 +37,14 @@ runs:
       run: echo "${{ github.action_path }}" >> $GITHUB_PATH
       shell: bash
 
-    # todo: rename bash script to restore.sh
     - run: restore.sh
-      env:
-        RESTIC_PASSWORD: ${{ inputs.restic-password }}
-
       shell: bash
+      env:
+        AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
+        DB_DATABASE: ${{ inputs.db-database }}
+        DB_HOST: ${{ inputs.db-host }}
+        DB_PASSWORD: ${{ inputs.db-password }}
+        DB_USERNAME: ${{ inputs.db-username }}
+        RESTIC_PASSWORD: ${{ inputs.restic-password }}
+        RESTIC_REPOSITORY: ${{ inputs.restic-password }}
