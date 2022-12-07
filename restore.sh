@@ -168,9 +168,12 @@ du -ah $complete_download_path
 
 echo '\n\n'
 
+# export PGPASSWORD for pqsl commands
+export PGPASSWORD=$DB_PASSWORD
+
 # Let's start the restore process
 # We need to get rid of the existing database
-echo '\nDropping the database if it exists so we canb start fresh...'
+echo '\nDropping the database if it exists so we can start fresh...'
 psql -h $DB_HOST -U $DB_USERNAME -c "DROP DATABASE IF EXISTS $DB_DATABASE;"
 
 # Now that we got rid of the database, we can create a new one
