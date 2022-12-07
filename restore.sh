@@ -22,7 +22,7 @@ complete_download_path="$base_path/$unix_time"
 mkdir -p "$complete_download_path"
 
 # The function that will clean up what we did at the end
-function clean_up {
+function clean_up () {
   cd $base_path
   rm -rf $unix_time
 }
@@ -135,7 +135,7 @@ cd $complete_download_path
 # process. I assume that if there is a problem with a byte, the checksum will fail thus indicating that the file
 # is corrupted.
 if [ -x "$(command -v cksum)" ]; then
-    
+
     # Verify the integrity of the data
     echo '\n\n'
     echo 'Verifying integrity of the data...'
@@ -199,7 +199,7 @@ psql -d $DB_DATABASE -h $DB_HOST -U $DB_USERNAME -f $complete_download_path/inde
 # echo "\n\n"
 # read -p "Would you like to clean up now (delete download)? (y/n) " yn
 
-# case $yn in 
+# case $yn in
 # 	[yY] ) echo "Cleaning up..."; clean_up; break;;
 # 	[nN] ) break;;
 # 	* ) echo invalid response;;
