@@ -44,7 +44,7 @@ runs:
         AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
         DB_DATABASE: ${{ inputs.db-database }}
         DB_HOST: ${{ inputs.db-host }}
-        DB_PASSWORD: ${{ inputs.db-password }}
+        PGPASSWORD: ${{ inputs.db-password }}
         DB_USERNAME: ${{ inputs.db-username }}
         RESTIC_PASSWORD: ${{ inputs.restic-password }}
         RESTIC_REPOSITORY: ${{ inputs.restic-repository }}

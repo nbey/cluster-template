@@ -104,13 +104,13 @@ if [ -z "$DB_USERNAME" ]; then
     exit 1
 fi
 
-if [ -z "$DB_PASSWORD" ]; then
-    echo '\nDB Password is required.'
-#     echo 'Please enter the password (or ctl-c to exit):'
-#     read db_password
-#     export DB_PASSWORD=$db_password
-    exit 1
-fi
+# if [ -z "$DB_PASSWORD" ]; then
+#     echo '\nDB Password is required.'
+# #     echo 'Please enter the password (or ctl-c to exit):'
+# #     read db_password
+# #     export DB_PASSWORD=$db_password
+#     exit 1
+# fi
 
 # Let's get the process started
 # We will download the latest snapshot for the production database
@@ -168,8 +168,6 @@ du -ah $complete_download_path
 
 echo '\n\n'
 
-# export PGPASSWORD for pqsl commands
-export PGPASSWORD=$DB_PASSWORD
 
 # Let's start the restore process
 # We need to get rid of the existing database
