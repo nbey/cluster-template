@@ -47,4 +47,4 @@ runs:
         DB_PASSWORD: ${{ inputs.db-password }}
         DB_USERNAME: ${{ inputs.db-username }}
         RESTIC_PASSWORD: ${{ inputs.restic-password }}
-        RESTIC_REPOSITORY: ${{ inputs.restic-password }}
+        RESTIC_REPOSITORY: ${{ inputs.restic-repository }}
