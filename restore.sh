@@ -22,7 +22,7 @@ complete_download_path="$base_path/$unix_time"
 mkdir -p "$complete_download_path"
 
 # The function that will clean up what we did at the end
-function clean_up () {
+clean_up() {
   cd $base_path
   rm -rf $unix_time
 }
