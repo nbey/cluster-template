@@ -104,13 +104,21 @@ if [ -z "$DB_USERNAME" ]; then
     exit 1
 fi
 
-# if [ -z "$DB_PASSWORD" ]; then
-#     echo '\nDB Password is required.'
-# #     echo 'Please enter the password (or ctl-c to exit):'
-# #     read db_password
-# #     export DB_PASSWORD=$db_password
-#     exit 1
-# fi
+if [ -z "$PGPASSWORD" ]; then
+    echo '\nPGPassword is required.'
+#     echo 'Please enter the password (or ctl-c to exit):'
+#     read db_password
+#     export DB_PASSWORD=$db_password
+    exit 1
+fi
+
+# Let's test the postgres connection first
+pg_isready -d $DB_DATABASE -h $DB_HOST -U $DB_USERNAME
+retVal=$?
+if [ $retVal -ne 0 ]; then
+    echo "Error with postgres connection"
+    exit 1
+fi
 
 # Let's get the process started
 # We will download the latest snapshot for the production database
@@ -173,13 +181,23 @@ echo '\n\n'
 # We need to get rid of the existing database
 echo '\nDropping the database if it exists so we can start fresh...'
 psql -h $DB_HOST -U $DB_USERNAME -c "DROP DATABASE IF EXISTS $DB_DATABASE;"
+retVal=$?
+if [ $retVal -ne 0 ]; then
+    echo "Error with dropping database"
+    exit 1
+fi
 
 # Now that we got rid of the database, we can create a new one
 echo '\nCreating the database...'
 psql -h $DB_HOST -U $DB_USERNAME -c "CREATE DATABASE $DB_DATABASE;"
+retVal=$?
+if [ $retVal -ne 0 ]; then
+    echo "Error with creating database"
+    exit 1
+fi
 
 # Quick sanity check to make sure that the database was created
-if psql -lqt | cut -d \| -f 1 | grep -qw $DB_DATABASE; then
+if psql -h $DB_HOST -U $DB_USERNAME -lqt | cut -d \| -f 1 | grep -qw $DB_DATABASE; then
     echo '\n Database appears to have been created successfully. Ready to restore the data.'
 else
     echo '\nError: The database does not seem to exist. Maybe we had a problem creating it?' >&2
