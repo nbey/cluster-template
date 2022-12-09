@@ -179,7 +179,10 @@ echo '\n\n'
 
 # Let's start the restore process
 
-# First we need to terminate all connections to the DB
+# Prevent connections to the DB
+psql -d postgres -c "ALTER DATABASE $DB_DATABASE WITH ALLOW_CONNECTIONS false;";
+
+# Terminate all connections to the DB
 psql -d postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DB_DATABASE';"
 
 # We need to get rid of the existing database
@@ -199,6 +202,9 @@ if [ $retVal -ne 0 ]; then
     echo "Error with creating database"
     exit 1
 fi
+
+# Re-enable DB Connections
+psql -d postgres -c "ALTER DATABASE $DB_DATABASE WITH ALLOW_CONNECTIONS true;";
 
 # Quick sanity check to make sure that the database was created
 if psql -h $DB_HOST -U $DB_USERNAME -lqt | cut -d \| -f 1 | grep -qw $DB_DATABASE; then
