@@ -113,7 +113,11 @@ if [ -z "$PGPASSWORD" ]; then
 fi
 
 # Let's test the postgres connection first
-pg_isready -d $DB_DATABASE -h $DB_HOST -U $DB_USERNAME
+pg_isready \
+    -d $DB_DATABASE \
+    -h $DB_HOST \
+    -U $DB_USERNAME
+
 retVal=$?
 if [ $retVal -ne 0 ]; then
     echo "Error with postgres connection"
@@ -180,14 +184,25 @@ echo '\n\n'
 # Let's start the restore process
 
 # Prevent connections to the DB
-psql -d postgres -c "ALTER DATABASE $DB_DATABASE WITH ALLOW_CONNECTIONS false;";
+psql \
+    -d postgres \
+    -h $DB_HOST \
+    -U $DB_USERNAME \
+    -c "ALTER DATABASE $DB_DATABASE WITH ALLOW_CONNECTIONS false;";
 
 # Terminate all connections to the DB
-psql -d postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DB_DATABASE';"
+psql \
+    -d postgres \
+    -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DB_DATABASE';"
 
 # We need to get rid of the existing database
 echo '\nDropping the database if it exists so we can start fresh...'
-psql -d postgres -h $DB_HOST -U $DB_USERNAME -c "DROP DATABASE IF EXISTS $DB_DATABASE;"
+psql \
+    -d postgres \
+    -h $DB_HOST \
+    -U $DB_USERNAME \
+    -c "DROP DATABASE IF EXISTS $DB_DATABASE;"
+
 retVal=$?
 if [ $retVal -ne 0 ]; then
     echo "Error with dropping database"
@@ -196,7 +211,12 @@ fi
 
 # Now that we got rid of the database, we can create a new one
 echo '\nCreating the database...'
-psql -d postgres -h $DB_HOST -U $DB_USERNAME -c "CREATE DATABASE $DB_DATABASE;"
+psql \
+    -d postgres \
+    -h $DB_HOST \
+    -U $DB_USERNAME \
+    -c "CREATE DATABASE $DB_DATABASE;"
+
 retVal=$?
 if [ $retVal -ne 0 ]; then
     echo "Error with creating database"
@@ -204,7 +224,11 @@ if [ $retVal -ne 0 ]; then
 fi
 
 # Re-enable DB Connections
-psql -d postgres -c "ALTER DATABASE $DB_DATABASE WITH ALLOW_CONNECTIONS true;";
+psql \
+    -d postgres \
+    -h $DB_HOST \
+    -U $DB_USERNAME \
+    -c "ALTER DATABASE $DB_DATABASE WITH ALLOW_CONNECTIONS true;";
 
 # Quick sanity check to make sure that the database was created
 if psql -h $DB_HOST -U $DB_USERNAME -lqt | cut -d \| -f 1 | grep -qw $DB_DATABASE; then
@@ -216,7 +240,11 @@ fi
 
 # Now that we have a database, we can restore the data
 echo "Lets import our snapshot to the database"
-psql -d $DB_DATABASE -h $DB_HOST -U $DB_USERNAME -f $complete_download_path/indevets-core.sql
+psql \
+    -d $DB_DATABASE \
+    -h $DB_HOST \
+    -U $DB_USERNAME \
+    -f $complete_download_path/indevets-core.sql
 
 # In testing I provided the option to not clean up
 # Since this is moving to production, I am going to remove the option to NOT clean up
