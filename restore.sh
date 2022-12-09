@@ -178,9 +178,13 @@ echo '\n\n'
 
 
 # Let's start the restore process
+
+# First we need to terminate all connections to the DB
+psql -d postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DB_DATABASE';"
+
 # We need to get rid of the existing database
 echo '\nDropping the database if it exists so we can start fresh...'
-psql -h $DB_HOST -U $DB_USERNAME -c "DROP DATABASE IF EXISTS $DB_DATABASE;"
+psql -d postgres -h $DB_HOST -U $DB_USERNAME -c "DROP DATABASE IF EXISTS $DB_DATABASE;"
 retVal=$?
 if [ $retVal -ne 0 ]; then
     echo "Error with dropping database"
@@ -189,7 +193,7 @@ fi
 
 # Now that we got rid of the database, we can create a new one
 echo '\nCreating the database...'
-psql -h $DB_HOST -U $DB_USERNAME -c "CREATE DATABASE $DB_DATABASE;"
+psql -d postgres -h $DB_HOST -U $DB_USERNAME -c "CREATE DATABASE $DB_DATABASE;"
 retVal=$?
 if [ $retVal -ne 0 ]; then
     echo "Error with creating database"
