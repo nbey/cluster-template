@@ -141,8 +141,11 @@ echo '-----------------------------------------------\n'
 # Download the latest snapshot with restic
 restic restore latest -v -t $complete_download_path
 
+# Shortcut for snapshot filepath
+snapshot_filepath="$complete_download_path/$restic_filename"
+
 # Let's make sure that the download was successful
-if [[ ! -f "$complete_download_path/$restic_filename" ]]; then
+if [[ ! -f "$snapshot_filepath" ]]; then
   echo 'Error: The snapshot was not downloaded successfully.' >&2
   exit 1
 fi
@@ -179,7 +182,7 @@ echo 'Extracting the snapshot...'
 echo '-------------------------\n\n'
 
 # We are going to keep the original file just in case
-gunzip --keep $complete_download_path/$restic_filename
+gunzip --keep $snapshot_filepath
 
 # Outputting some information about the download
 echo "Snapshot downloaded and extracted successfully to $complete_download_path"
@@ -252,7 +255,7 @@ psql \
     -d $DB_DATABASE \
     -h $DB_HOST \
     -U $DB_USERNAME \
-    -f $complete_download_path/$restic_filename
+    -f $snapshot_filepath
 
 # In testing I provided the option to not clean up
 # Since this is moving to production, I am going to remove the option to NOT clean up
