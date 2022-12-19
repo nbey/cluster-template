@@ -7,6 +7,10 @@ inputs:
   aws-secret-access-key:
     description: 'Supply AWS Secret Access Key'
     required: true
+  restic-filename:
+    description: 'Filename for restic snapshot'
+    required: false
+    default: 'indevets-core-partial.sql.gz'
   restic-repository:
     description: 'Supply Restic Repository config'
     required: true
@@ -46,5 +50,6 @@ runs:
         DB_HOST: ${{ inputs.db-host }}
         PGPASSWORD: ${{ inputs.db-password }}
         DB_USERNAME: ${{ inputs.db-username }}
+        RESTIC_FILENAME: ${{ inputs.restic-filename }}
         RESTIC_PASSWORD: ${{ inputs.restic-password }}
         RESTIC_REPOSITORY: ${{ inputs.restic-repository }}
