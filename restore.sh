@@ -24,6 +24,9 @@ else
   restic_filename="indevets-core-partial.sql.gz"
 fi
 
+# Shortcut for snapshot filepath
+snapshot_filepath="$complete_download_path/$restic_filename"
+
 
 # Let's create the directory if it doesn't exist
 # It is likly non-existant because we are using a timestamp as the directory name
@@ -141,9 +144,6 @@ echo '-----------------------------------------------\n'
 # Download the latest snapshot with restic
 restic restore latest -v -t $complete_download_path
 
-# Shortcut for snapshot filepath
-snapshot_filepath="$complete_download_path/$restic_filename"
-
 # Let's make sure that the download was successful
 if [[ ! -f "$snapshot_filepath" ]]; then
   echo 'Error: The snapshot was not downloaded successfully.' >&2
@@ -187,7 +187,7 @@ gunzip --keep $snapshot_filepath
 # Outputting some information about the download
 echo "Snapshot downloaded and extracted successfully to $complete_download_path"
 echo "Details of the snapshot:"
-du -ah $complete_download_path
+du -ah $snapshot_filepath
 
 echo '\n\n'
 
