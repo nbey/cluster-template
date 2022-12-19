@@ -17,6 +17,14 @@ unix_time=`date +%s`
 # Full download path
 complete_download_path="$base_path/$unix_time"
 
+# Restic Snapshot filename
+if [ -z "$RESTIC_FILENAME" ]; then
+  restic_filename=$RESTIC_FILENAME
+else
+  restic_filename="indevets-core-partial.sql.gz"
+fi
+
+
 # Let's create the directory if it doesn't exist
 # It is likly non-existant because we are using a timestamp as the directory name
 mkdir -p "$complete_download_path"
@@ -134,7 +142,7 @@ echo '-----------------------------------------------\n'
 restic restore latest -v -t $complete_download_path
 
 # Let's make sure that the download was successful
-if [[ ! -f "$complete_download_path/indevets-core.sql.gz" ]]; then
+if [[ ! -f "$complete_download_path/$restic_filename" ]]; then
   echo 'Error: The snapshot was not downloaded successfully.' >&2
   exit 1
 fi
@@ -153,8 +161,8 @@ if [ -x "$(command -v cksum)" ]; then
     echo 'Verifying integrity of the data...'
     echo '---------------------------------\n'
 
-    if cksum indevets-core.sql.gz; then
-        echo 'Checksum of indevets-core.sql.gz is complete'
+    if cksum $restic_filename; then
+        echo "Checksum of $restic_filename is complete"
         echo 'Moving on...'
     else
         echo 'Error: Chucksum failed. The download may be corrupt. Bailing out.' >&2
@@ -171,7 +179,7 @@ echo 'Extracting the snapshot...'
 echo '-------------------------\n\n'
 
 # We are going to keep the original file just in case
-gunzip --keep $complete_download_path/indevets-core.sql.gz
+gunzip --keep $complete_download_path/$restic_filename
 
 # Outputting some information about the download
 echo "Snapshot downloaded and extracted successfully to $complete_download_path"
@@ -244,7 +252,7 @@ psql \
     -d $DB_DATABASE \
     -h $DB_HOST \
     -U $DB_USERNAME \
-    -f $complete_download_path/indevets-core.sql
+    -f $complete_download_path/$restic_filename
 
 # In testing I provided the option to not clean up
 # Since this is moving to production, I am going to remove the option to NOT clean up
