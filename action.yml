@@ -1,21 +1,11 @@
-name: 'K8s: Deploy k8s-manifests'
-description: 'Deploy k8s manifests to cluster via GH action'
+name: 'CATS Restore DB From Snapshot'
+description: 'Restore DB from latest Restic Snapshot'
 inputs:
   aws-access-key-id:
     description: 'Supply AWS Access Key ID'
     required: true
   aws-secret-access-key:
     description: 'Supply AWS Secret Access Key'
-    required: true
-  restic-filename:
-    description: 'Filename for restic snapshot'
-    required: false
-    default: 'indevets-core-partial.sql.gz'
-  restic-repository:
-    description: 'Supply Restic Repository config'
-    required: true
-  restic-password:
-    description: 'Supply Restic Password config'
     required: true
   db-host:
     description: 'Supply database host'
@@ -29,7 +19,22 @@ inputs:
   db-password:
     description: 'Supply database password'
     required: true
-
+  restic-filename:
+    description: 'Filename for restic snapshot'
+    required: false
+    default: 'indevets-core-partial.sql.gz'
+  restic-repository:
+    description: 'Supply Restic Repository config'
+    required: true
+  restic-password:
+    description: 'Supply Restic Password config'
+    required: true
+  ssh-password:
+    description: 'Supply SSH Password for DB server'
+    required: true
+  ssh-username:
+    description: 'Supply SSH Username for DB server'
+    required: true
 
 runs:
   using: "composite"
@@ -53,3 +58,5 @@ runs:
         RESTIC_FILENAME: ${{ inputs.restic-filename }}
         RESTIC_PASSWORD: ${{ inputs.restic-password }}
         RESTIC_REPOSITORY: ${{ inputs.restic-repository }}
+        SSH_PASSWORD: ${{ inputs.ssh-password }}
+        SSH_USERNAME: ${{ inputs.ssh-username }}
