@@ -1,17 +1,87 @@
 #!/bin/sh
 
-# This script is used to copy the production database to a designated database.
-# The assumption is that the destination database is a staging database
+# This script is used to restore the latest restic snapshot into a DB
+
+
+# Sanity Checks
+
+# The ideal choice is to grab the latest data is using restic
+# Restic is a backup tool that is used to backup the production database
+# But we need to make sure that the restic binary is available
+# Restic docs can be found here: https://restic.readthedocs.io/en/stable/
+if ! [ -x "$(command -v restic)" ]; then
+  echo 'Error: restic is not installed.' >&2
+  exit 1
+fi
+
+# Requiring gunzip for use with compressed snapshots
+if ! [ -x "$(command -v gunzip)" ]; then
+  echo 'Error: Gunzip is not installed. This is needed to extract the download' >&2
+  exit 1
+fi
+
+# End Sanity Checks
+
+
+# Input Variables Check
+
+# AWS Credentials used w/ Restic
+if [ -z "$AWS_ACCESS_KEY_ID" ]; then
+  echo 'AWS Access Key ID is required.'
+  exit 1
+fi
+if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
+    echo 'AWS Secret Access Key is required.'
+    exit 1
+fi
+
+# Restic Repository Credentials
+if [ -z "$RESTIC_REPOSITORY" ]; then
+    echo 'Restic repository is required.'
+    exit 1
+fi
+if [ -z "$RESTIC_PASSWORD" ]; then
+    echo 'Restic password is required.'
+    exit 1
+fi
+
+# DB Configuration
+if [ -z "$DB_HOST" ]; then
+    echo '\nDB Host is required.'
+    exit 1
+fi
+if [ -z "$DB_DATABASE" ]; then
+    echo '\nDB Database is required.'
+    exit 1
+fi
+if [ -z "$DB_USERNAME" ]; then
+    echo '\nDB Username is required.'
+    exit 1
+fi
+
+# Postgres Password Configuration
+if [ -z "$PGPASSWORD" ]; then
+    echo '\nPGPassword is required.'
+    exit 1
+fi
+
+# DB SSH Credentials
+if [ -z "$SSH_KEY_ENCODED" ]; then
+    echo '\nSSH_KEY_ENCODED is required.'
+    exit 1
+fi
+if [ -z "$SSH_USERNAME" ]; then
+    echo '\nSSH_USERNAME is required.'
+    exit 1
+fi
+
+# End Input Variables Check
 
 
 # Path to store the database snapshot that is downloaded
-# The download will be extracted and restored into the db
-# The file will be deleted after the restore
 base_path=~/tmp/production/snapshots
 
 # Timestamp for the snapshot download
-# This will be used for the directory that the snapshot is downloaded to
-# In the event that the download is not deleted, we will know when it was downloaded
 unix_time=`date +%s`
 
 # Full download path
@@ -27,103 +97,22 @@ fi
 # Shortcut for snapshot filepath
 snapshot_filepath="$complete_download_path/$restic_filename"
 
-
 # Let's create the directory if it doesn't exist
-# It is likly non-existant because we are using a timestamp as the directory name
 mkdir -p "$complete_download_path"
 
-# The function that will clean up what we did at the end
-clean_up() {
-  cd $base_path
-  rm -rf $unix_time
-}
+# Setup SSH Connection Credentials
+touch ~/db-ssh-key
+cat $SSH_KEY_ENCODED | base64 -d > ~/db-ssh-key
 
-# SANITY CHECKS START
-# Make sure that the binaries we need are installed
-
-# The ideal choice is to grab the latest data is using restic
-# Restic is a backup tool that is used to backup the production database
-# But we need to make sure that the restic binary is available
-# Restic docs can be found here: https://restic.readthedocs.io/en/stable/
-if ! [ -x "$(command -v restic)" ]; then
-  echo 'Error: restic is not installed.' >&2
-  exit 1
-fi
-
-# Requiring gunzip to be installed because I want to download the compressed version of
-# the backup. This will help to save on bandwidth
-if ! [ -x "$(command -v gunzip)" ]; then
-  echo 'Error: Gunzip is not installed. This is needed to extract the download' >&2
-  exit 1
-fi
-# SANITY CHECKS END
-
-# Requesting necessary information for connections
-if [ -z "$AWS_ACCESS_KEY_ID" ]; then
-  echo 'AWS Access Key ID is required.'
-#   echo 'Please enter the AWS Access Key ID (or ctl-c to exit):'
-#   read access_key_id
-#   export AWS_ACCESS_KEY_ID=$access_key_id
-  exit 1
-fi
-
-if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
-    echo 'AWS Secret Access Key is required.'
-#     echo 'Please enter the AWS Secret Access Key (or ctl-c to exit):'
-#     read secret_access_key
-#     export AWS_SECRET_ACCESS_KEY=$secret_access_key
+# Test the SSH Connection
+ssh -q -i ~/db-ssh-key $SSH_USERNAME@$DB_HOST exit
+retVal=$?
+if [ $retVal -ne 0 ]; then
+    echo "Error with SSH connection"
     exit 1
 fi
 
-if [ -z "$RESTIC_REPOSITORY" ]; then
-    echo 'Restic repository is required.'
-#     echo 'Please enter Restic repository (or ctl-c to exit):'
-#     read restic_repo
-#     export RESTIC_REPOSITORY=$restic_repo
-    exit 1
-fi
-
-if [ -z "$RESTIC_PASSWORD" ]; then
-    echo 'Restic password is required.'
-#     echo 'Please enter the Restic password (or ctl-c to exit):'
-#     read restic_password
-#     export RESTIC_PASSWORD=$restic_password
-    exit 1
-fi
-
-if [ -z "$DB_HOST" ]; then
-    echo '\nDB Host is required.'
-#     echo 'Please enter the host (or ctl-c to exit):'
-#     read db_host
-#     export DB_HOST=$db_host
-    exit 1
-fi
-
-if [ -z "$DB_DATABASE" ]; then
-    echo '\nDB Database is required.'
-#     echo 'Please enter the database (or ctl-c to exit):'
-#     read db_database
-#     export DB_DATABASE=$db_database
-    exit 1
-fi
-
-if [ -z "$DB_USERNAME" ]; then
-    echo '\nDB Username is required.'
-#     echo 'Please enter the username (or ctl-c to exit):'
-#     read db_username
-#     export DB_USERNAME=$db_username
-    exit 1
-fi
-
-if [ -z "$PGPASSWORD" ]; then
-    echo '\nPGPassword is required.'
-#     echo 'Please enter the password (or ctl-c to exit):'
-#     read db_password
-#     export DB_PASSWORD=$db_password
-    exit 1
-fi
-
-# Let's test the postgres connection first
+# Test the postgres connection first
 pg_isready \
     -d $DB_DATABASE \
     -h $DB_HOST \
@@ -135,7 +124,6 @@ if [ $retVal -ne 0 ]; then
     exit 1
 fi
 
-# Let's get the process started
 # We will download the latest snapshot for the production database
 echo '\n\n'
 echo 'Fetching latest snapshot data from production...'
@@ -150,7 +138,6 @@ if [[ ! -f "$snapshot_filepath" ]]; then
   exit 1
 fi
 
-# Let's navigate to the download directory
 cd $complete_download_path
 
 # This may be a bit overkill, but a checksum should scan every byte of the file
@@ -176,37 +163,36 @@ else
   echo 'This does not mean that the data is corrupted. It just means that we cannot verify the integrity of the data.'
 fi
 
-#Extract the snapshot
+# Extract the snapshot
 echo '\n\n'
 echo 'Extracting the snapshot...'
 echo '-------------------------\n\n'
 
-# We are going to keep the original file just in case
 gunzip --keep $snapshot_filepath
 
-# Outputting some information about the download
 echo "Snapshot downloaded and extracted successfully to $complete_download_path"
 echo "Details of the snapshot:"
 du -ah $snapshot_filepath
 
 echo '\n\n'
 
-
-# Let's start the restore process
-
-# Prevent connections to the DB
-psql \
+# Disallow new connections
+ psql \
     -d postgres \
-    -h $DB_HOST \
     -U $DB_USERNAME \
-    -c "ALTER DATABASE $DB_DATABASE WITH ALLOW_CONNECTIONS false;";
+    -h DB_HOST \
+    -c "ALTER DATABASE $DB_DATABASE WITH ALLOW_CONNECTIONS false;"
+    
+# Kill current connections
+ssh \
+    $SSH_USERNAME@$DB_HOST \
+    -i ~/db-ssh-key \
+    -t << EOF
+        sudo su - postgres -c \
+        'psql -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '\''$DB_DATABASE'\'';"'
+    EOF
 
-# Terminate all connections to the DB
-psql \
-    -d postgres \
-    -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DB_DATABASE';"
-
-# We need to get rid of the existing database
+# Drop DB
 echo '\nDropping the database if it exists so we can start fresh...'
 psql \
     -d postgres \
@@ -220,7 +206,7 @@ if [ $retVal -ne 0 ]; then
     exit 1
 fi
 
-# Now that we got rid of the database, we can create a new one
+# Create DB
 echo '\nCreating the database...'
 psql \
     -d postgres \
@@ -257,26 +243,6 @@ psql \
     -U $DB_USERNAME \
     -f $snapshot_filepath
 
-# In testing I provided the option to not clean up
-# Since this is moving to production, I am going to remove the option to NOT clean up
-# If you would like to keep the snapshot, you can comment out the following lines
-# Otherwise, the snapshot will be deleted after the restore is complete
-
-# while true; do
-
-# echo "\n\n"
-# read -p "Would you like to clean up now (delete download)? (y/n) " yn
-
-# case $yn in
-# 	[yY] ) echo "Cleaning up..."; clean_up; break;;
-# 	[nN] ) break;;
-# 	* ) echo invalid response;;
-# esac
-
-# done
-
- echo "\nCleaning up..."
- clean_up()
 
 echo "\n\nAll done. Thank you for allowing me to help today."
 echo "Have a great day!"
