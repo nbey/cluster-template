@@ -29,8 +29,8 @@ inputs:
   restic-password:
     description: 'Supply Restic Password config'
     required: true
-  ssh-password:
-    description: 'Supply SSH Password for DB server'
+  ssh-key-encoded:
+    description: 'Supply Base64 encoded SSH Key for DB server'
     required: true
   ssh-username:
     description: 'Supply SSH Username for DB server'
@@ -58,5 +58,5 @@ runs:
         RESTIC_FILENAME: ${{ inputs.restic-filename }}
         RESTIC_PASSWORD: ${{ inputs.restic-password }}
         RESTIC_REPOSITORY: ${{ inputs.restic-repository }}
-        SSH_PASSWORD: ${{ inputs.ssh-password }}
+        SSH_KEY_ENCODED: ${{ inputs.ssh-key-encoded }}
         SSH_USERNAME: ${{ inputs.ssh-username }}
