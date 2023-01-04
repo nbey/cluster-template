@@ -109,6 +109,7 @@ ssh -q -i ~/db-ssh-key $SSH_USERNAME@$DB_HOST exit
 retVal=$?
 if [ $retVal -ne 0 ]; then
     echo "Error with SSH connection"
+    echo "Return Value: "$retVal
     exit 1
 fi
 
