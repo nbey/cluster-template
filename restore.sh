@@ -182,35 +182,37 @@ du -ah $snapshot_filepath
 
 echo '\n\n'
 
-# Disallow new connections
+echo "Disallowing new connections"
  psql \
     -d postgres \
     -U $DB_USERNAME \
     -h DB_HOST \
     -c "ALTER DATABASE $DB_DATABASE WITH ALLOW_CONNECTIONS false;"
     
-# Kill current connections
+echo "Killing current connections"
+echo '\nDropping the database if it exists so we can start fresh...'
 ssh \
     $SSH_USERNAME@$DB_HOST \
     -i ~/db-ssh-key \
     -t << EOF
         sudo su - postgres -c \
         'psql -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '\''$DB_DATABASE'\'';"'
+        sudo su - postgres -c 'psql -c "DROP DATABASE IF EXISTS $DB_DATABASE;"'
 EOF
 
 # Drop DB
-echo '\nDropping the database if it exists so we can start fresh...'
-psql \
-    -d postgres \
-    -h $DB_HOST \
-    -U $DB_USERNAME \
-    -c "DROP DATABASE IF EXISTS $DB_DATABASE;"
+#echo '\nDropping the database if it exists so we can start fresh...'
+# psql \
+#     -d postgres \
+#     -h $DB_HOST \
+#     -U $DB_USERNAME \
+#     -c "DROP DATABASE IF EXISTS $DB_DATABASE;"
 
-retVal=$?
-if [ $retVal -ne 0 ]; then
-    echo "Error with dropping database"
-    exit 1
-fi
+# retVal=$?
+# if [ $retVal -ne 0 ]; then
+#     echo "Error with dropping database"
+#     exit 1
+# fi
 
 # Create DB
 echo '\nCreating the database...'
