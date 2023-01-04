@@ -177,8 +177,14 @@ echo '-------------------------\n\n'
 gunzip --keep $snapshot_filepath
 
 echo "Snapshot downloaded and extracted successfully to $complete_download_path"
-echo "Details of the snapshot:"
+echo "\nDetails of the snapshot:"
 du -ah $snapshot_filepath
+
+echo '\n\n'
+
+echo "Details of the decompressed snapshot:"
+decompressed_snapshot_filepath=${snapshot_filepath%.*}
+du -ah $decompressed_snapshot_filepath
 
 echo '\n\n'
 
@@ -249,7 +255,7 @@ psql \
     -d $DB_DATABASE \
     -h $DB_HOST \
     -U $DB_USERNAME \
-    -f $snapshot_filepath
+    -f $decompressed_snapshot_filepath
 
 
 echo "\n\nAll done. Thank you for allowing me to help today."
