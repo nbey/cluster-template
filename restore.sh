@@ -196,7 +196,7 @@ ssh \
     -t << EOF
         sudo su - postgres -c \
         'psql -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '\''$DB_DATABASE'\'';"'
-    EOF
+EOF
 
 # Drop DB
 echo '\nDropping the database if it exists so we can start fresh...'
