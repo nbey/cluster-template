@@ -87,14 +87,14 @@ unix_time=`date +%s`
 # Full download path
 complete_download_path="$base_path/$unix_time"
 
-echo "RESTIC_FILENAME: "$RESTIC_FILENAME
+
 # Restic Snapshot filename
 if [ -z "$RESTIC_FILENAME" ]; then
-  restic_filename=$RESTIC_FILENAME
-else
   restic_filename="indevets-core-partial.sql.gz"
+else
+  restic_filename=$RESTIC_FILENAME
 fi
-echo "restic_filename: "$restic_filename
+
 
 # Shortcut for snapshot filepath
 snapshot_filepath="$complete_download_path/$restic_filename"
