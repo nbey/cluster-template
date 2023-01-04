@@ -104,6 +104,7 @@ mkdir -p "$complete_download_path"
 touch ~/db-ssh-key
 echo $SSH_KEY_ENCODED | base64 -d > ~/db-ssh-key
 chmod 600 ~/db-ssh-key
+mkdir -p ~/.ssh
 ssh-keyscan -H $DB_HOST >> ~/.ssh/known_hosts
 
 # Test the SSH Connection
