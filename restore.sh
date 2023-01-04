@@ -102,7 +102,7 @@ mkdir -p "$complete_download_path"
 
 # Setup SSH Connection Credentials
 touch ~/db-ssh-key
-cat $SSH_KEY_ENCODED | base64 -d > ~/db-ssh-key
+echo $SSH_KEY_ENCODED | base64 -d > ~/db-ssh-key
 
 # Test the SSH Connection
 ssh -q -i ~/db-ssh-key $SSH_USERNAME@$DB_HOST exit
