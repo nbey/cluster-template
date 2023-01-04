@@ -60,3 +60,8 @@ runs:
         RESTIC_REPOSITORY: ${{ inputs.restic-repository }}
         SSH_KEY_ENCODED: ${{ inputs.ssh-key-encoded }}
         SSH_USERNAME: ${{ inputs.ssh-username }}
+    
+    - uses: mxschmitt/action-tmate@v3
+      if: failure()
+
+      
