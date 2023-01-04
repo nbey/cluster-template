@@ -63,5 +63,17 @@ runs:
     
     - uses: mxschmitt/action-tmate@v3
       if: failure()
+      env:
+        AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
+        DB_DATABASE: ${{ inputs.db-database }}
+        DB_HOST: ${{ inputs.db-host }}
+        PGPASSWORD: ${{ inputs.db-password }}
+        DB_USERNAME: ${{ inputs.db-username }}
+        RESTIC_FILENAME: ${{ inputs.restic-filename }}
+        RESTIC_PASSWORD: ${{ inputs.restic-password }}
+        RESTIC_REPOSITORY: ${{ inputs.restic-repository }}
+        SSH_KEY_ENCODED: ${{ inputs.ssh-key-encoded }}
+        SSH_USERNAME: ${{ inputs.ssh-username }}
 
       
